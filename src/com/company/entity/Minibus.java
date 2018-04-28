@@ -8,12 +8,15 @@ import com.company.simulation.Config;
 public class Minibus extends Entity {
 
     private SimQueue<Zakaznik> cestujuci;
-    private int pocetMiest = Config.pocetMiestMinibusu;
+    private static final int pocetMiest = Config.pocetMiestMinibusu;
     private String predoslaZastavka;
     private String aktualnaZastavka;
+    private int pocetVolnychMiest;
 
     public Minibus(Simulation mySim) {
         super(mySim);
+        this.cestujuci = new SimQueue<>();
+        this.pocetVolnychMiest = pocetMiest;
     }
 
     public SimQueue<Zakaznik> getCestujuci() {
@@ -24,12 +27,15 @@ public class Minibus extends Entity {
         return pocetMiest;
     }
 
-    public void pridajZakaznika(Zakaznik zakaznik) {
+    public void nastupZakaznika(Zakaznik zakaznik) {
         cestujuci.enqueue(zakaznik);
+        pocetVolnychMiest -= 1 + zakaznik.getPocetSpolucestujucich();
     }
 
-    public Zakaznik vyberZakaznikaZRadu() {
-        return cestujuci.dequeue();
+    public Zakaznik vystupZakaznika() {
+        Zakaznik zakaznik = cestujuci.dequeue();
+        pocetVolnychMiest += 1 + zakaznik.getPocetSpolucestujucich();
+        return zakaznik;
     }
 
     public String getPredoslaZastavka() {
@@ -43,5 +49,9 @@ public class Minibus extends Entity {
     public void setAktualnaZastavka(String aktualnaZastavka) {
         this.predoslaZastavka = this.aktualnaZastavka;
         this.aktualnaZastavka = aktualnaZastavka;
+    }
+
+    public int getPocetVolnychMiest() {
+        return pocetVolnychMiest;
     }
 }

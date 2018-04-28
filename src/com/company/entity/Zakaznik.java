@@ -5,7 +5,6 @@ import OSPABA.Simulation;
 import OSPRNG.DeterministicRNG;
 import OSPRNG.EmpiricPair;
 import OSPRNG.EmpiricRNG;
-import OSPRNG.UniformDiscreteRNG;
 import com.company.simulation.MySimulation;
 
 public class Zakaznik extends Entity {
@@ -16,8 +15,8 @@ public class Zakaznik extends Entity {
             new EmpiricPair(new DeterministicRNG(2.0), 0.15),
             new EmpiricPair(new DeterministicRNG(3.0), 0.5)
     );
-    private int pocetSpolucestujucich;
-    private double vstupDoSystemu;
+    private final int pocetSpolucestujucich;
+    private final double vstupDoSystemu;
 
     public Zakaznik(Simulation mySim) {
         super(mySim);
@@ -27,10 +26,6 @@ public class Zakaznik extends Entity {
 
     public int getPocetSpolucestujucich() {
         return pocetSpolucestujucich;
-    }
-
-    public void setPocetSpolucestujucich(int pocetSpolucestujucich) {
-        this.pocetSpolucestujucich = pocetSpolucestujucich;
     }
 
     public double getVstupDoSystemu() {
