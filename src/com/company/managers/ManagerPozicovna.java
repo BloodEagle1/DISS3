@@ -1,6 +1,7 @@
 package com.company.managers;
 
 import OSPABA.*;
+import com.company.entity.Minibus;
 import com.company.simulation.*;
 import com.company.agents.*;
 import com.company.continualAssistants.*;
@@ -30,32 +31,67 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="AgentPohybu", id="22", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
+		if(((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
+			message.setCode(Mc.obsluzZak);
+			message.setAddressee(Id.agentObsluhy);
+			request(message);
+		}else {
+			myAgent().getRadZakPozicovna().enqueue(((MyMessage)message).getZakaznik());
+		}
 	}
 
 	//meta! sender="AgentObsluhy", id="24", type="Response"
 	public void processObsluzZak(MessageForm message)
 	{
+		if(((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
+			message.setCode(Mc.obsluzZak);
+			message.setAddressee(Id.agentObsluhy);
+			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
+			request(message);
+		}
 	}
 
 	//meta! sender="AgentPohybu", id="35", type="Request"
 	public void processNastupPozicovna(MessageForm message)
 	{
-		((MyMessage) message).getMinibus().setAktualnaZastavka("Pozicovna");
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesNastupuPozicovna);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="AgentPohybu", id="34", type="Request"
 	public void processVystupPozicovna(MessageForm message)
 	{
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesVystupuPozicovna);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="ProcesNastupuPozicovna", id="56", type="Finish"
 	public void processFinishProcesNastupuPozicovna(MessageForm message)
 	{
+		if (!myAgent().getRadZakPozicovna().isEmpty() &&
+				((MyMessage)message).getMinibus().getPocetVolnychMiest() >= myAgent().getRadZakPozicovna().peek().getPocetCestujucich()){
+			message.setCode(Mc.start);
+			message.setAddressee(Id.procesNastupuPozicovna);
+			startContinualAssistant(message);
+		}else {
+			message.setCode(Mc.nastupPozicovna);
+			response(message);
+		}
 	}
 
 	//meta! sender="ProcesVystupuPozicovna", id="58", type="Finish"
 	public void processFinishProcesVystupuPozicovna(MessageForm message)
 	{
+		if (!((MyMessage)message).getMinibus().getCestujuci().isEmpty()){
+			message.setCode(Mc.start);
+			message.setAddressee(Id.procesVystupuPozicovna);
+			startContinualAssistant(message);
+		}else {
+			message.setCode(Mc.vystupPozicovna);
+			response(message);
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

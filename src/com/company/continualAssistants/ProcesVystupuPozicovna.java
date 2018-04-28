@@ -1,6 +1,9 @@
 package com.company.continualAssistants;
 
 import OSPABA.*;
+import OSPRNG.UniformContinuousRNG;
+import com.company.entity.Minibus;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 import OSPABA.Process;
@@ -8,6 +11,9 @@ import OSPABA.Process;
 //meta! id="57"
 public class ProcesVystupuPozicovna extends Process
 {
+
+	private static UniformContinuousRNG genVystupu = new UniformContinuousRNG(2.0,10.0);
+
 	public ProcesVystupuPozicovna(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
@@ -23,6 +29,20 @@ public class ProcesVystupuPozicovna extends Process
 	//meta! sender="AgentPozicovna", id="58", type="Start"
 	public void processStart(MessageForm message)
 	{
+		double casVystupu = 0.0;
+		Minibus minibus = ((MyMessage)message).getMinibus();
+
+		if (!minibus.getCestujuci().isEmpty()){
+			Zakaznik zakaznik = minibus.vystupZakaznika();
+			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
+				casVystupu += genVystupu.sample();
+			}
+			myAgent().getRadZakPozicovna().enqueue(zakaznik);
+			message.setCode(Mc.start);
+
+		}
+		message.setCode(Mc.vystupPozicovnaHotovy);
+		hold(casVystupu, message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -36,6 +56,7 @@ public class ProcesVystupuPozicovna extends Process
 	//meta! sender="AgentPozicovna", id="93", type="Notice"
 	public void processVystupPozicovnaHotovy(MessageForm message)
 	{
+		assistantFinished(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

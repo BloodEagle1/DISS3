@@ -1,6 +1,8 @@
 package com.company.agents;
 
 import OSPABA.*;
+import OSPDataStruct.SimQueue;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
@@ -9,10 +11,14 @@ import com.company.instantAssistants.*;
 //meta! id="7"
 public class AgentPozicovna extends Agent
 {
+
+	private SimQueue<Zakaznik> radZakPozicovna;
+
 	public AgentPozicovna(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
 		init();
+		this.radZakPozicovna = new SimQueue<>();
 	}
 
 	@Override
@@ -36,4 +42,9 @@ public class AgentPozicovna extends Agent
 		addOwnMessage(Mc.vystupPozicovna);
 	}
 	//meta! tag="end"
+
+
+	public SimQueue<Zakaznik> getRadZakPozicovna() {
+		return radZakPozicovna;
+	}
 }
