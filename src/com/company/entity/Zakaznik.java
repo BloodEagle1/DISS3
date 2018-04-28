@@ -15,17 +15,17 @@ public class Zakaznik extends Entity {
             new EmpiricPair(new DeterministicRNG(2.0), 0.15),
             new EmpiricPair(new DeterministicRNG(3.0), 0.5)
     );
-    private final int pocetSpolucestujucich;
+    private final int pocetCestujucich;
     private final double vstupDoSystemu;
 
     public Zakaznik(Simulation mySim) {
         super(mySim);
-        this.pocetSpolucestujucich = (int) empiric.sample();
+        this.pocetCestujucich = 1 + (int) empiric.sample();
         this.vstupDoSystemu = mySim.currentTime();
     }
 
-    public int getPocetSpolucestujucich() {
-        return pocetSpolucestujucich;
+    public int getPocetCestujucich() {
+        return pocetCestujucich;
     }
 
     public double getVstupDoSystemu() {

@@ -29,12 +29,12 @@ public class Minibus extends Entity {
 
     public void nastupZakaznika(Zakaznik zakaznik) {
         cestujuci.enqueue(zakaznik);
-        pocetVolnychMiest -= 1 + zakaznik.getPocetSpolucestujucich();
+        pocetVolnychMiest -= zakaznik.getPocetCestujucich();
     }
 
     public Zakaznik vystupZakaznika() {
         Zakaznik zakaznik = cestujuci.dequeue();
-        pocetVolnychMiest += 1 + zakaznik.getPocetSpolucestujucich();
+        pocetVolnychMiest += zakaznik.getPocetCestujucich();
         return zakaznik;
     }
 
