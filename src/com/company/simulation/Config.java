@@ -5,4 +5,5 @@ public class Config {
 
     public static int pocetReplikacii;
     public static int pocetMiestMinibusu;
+    public static int pocetPracovnikov;
 }
