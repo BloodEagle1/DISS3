@@ -30,12 +30,16 @@ public class ManagerTerm3 extends Manager
 	//meta! sender="AgentPohybu", id="33", type="Request"
 	public void processVystupTerm3(MessageForm message)
 	{
-		((MyMessage) message).getMinibus().setAktualnaZastavka("Terminal 3");
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesVystupuTerm3);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="ProcesVystupuTerm3", id="53", type="Finish"
 	public void processFinish(MessageForm message)
 	{
+		message.setCode(Mc.vystupTerm3);
+		response(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
