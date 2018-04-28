@@ -30,7 +30,6 @@ public class ManagerTerm1 extends Manager
 	//meta! sender="AgentPohybu", id="31", type="Request"
 	public void processNastupTerm1(MessageForm message)
 	{
-		((MyMessage) message).getMinibus().setAktualnaZastavka("Terminal 1");
 		message.setCode(Mc.start);
 		message.setAddressee(Id.procesNastupuTerm1);
 		startContinualAssistant(message);
@@ -45,7 +44,8 @@ public class ManagerTerm1 extends Manager
 	//meta! sender="ProcesNastupuTerm1", id="47", type="Finish"
 	public void processFinish(MessageForm message)
 	{
-		message.setCode(Mc.nastupTerm2);
+		message.setCode(Mc.nastupTerm1);
+		response(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

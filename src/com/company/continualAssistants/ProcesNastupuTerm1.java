@@ -1,6 +1,7 @@
 package com.company.continualAssistants;
 
 import OSPABA.*;
+import OSPRNG.UniformContinuousRNG;
 import com.company.simulation.*;
 import com.company.agents.*;
 import OSPABA.Process;
@@ -8,6 +9,9 @@ import OSPABA.Process;
 //meta! id="46"
 public class ProcesNastupuTerm1 extends Process
 {
+
+	private UniformContinuousRNG genNastupu = new UniformContinuousRNG(10.0,14.0);
+
 	public ProcesNastupuTerm1(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
@@ -23,6 +27,19 @@ public class ProcesNastupuTerm1 extends Process
 	//meta! sender="AgentTerm1", id="47", type="Start"
 	public void processStart(MessageForm message)
 	{
+		double casNastupu = 0.0;
+		((MyMessage)message).setZakaznik(myAgent().getRadZakTerm1().dequeue());
+		if (((MyMessage)message).getMinibus().getPocetVolnychMiest() >= (((MyMessage) message).getZakaznik().getPocetCestujucich())){
+			for (int i = 0; i < (((MyMessage) message).getZakaznik().getPocetCestujucich()); i++) {
+				casNastupu += genNastupu.sample();
+			}
+			message.setCode(Mc.start);
+			hold(casNastupu, message);
+		} else {
+			((MyMessage)message).setZakaznik(null);
+			message.setCode(Mc.nastupTerm1Hotovy);
+		}
+
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
