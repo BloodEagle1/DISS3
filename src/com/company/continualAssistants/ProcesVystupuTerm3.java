@@ -32,12 +32,16 @@ public class ProcesVystupuTerm3 extends Process
 		double casVystupu = 0.0;
 		Minibus minibus = ((MyMessage)message).getMinibus();
 
-		Zakaznik zakaznik = minibus.vystupZakaznika();
-		for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
-			casVystupu += genVystupu.sample();
+		if (!minibus.getCestujuci().isEmpty()){
+			Zakaznik zakaznik = minibus.vystupZakaznika();
+			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
+				casVystupu += genVystupu.sample();
+			}
+			message.setCode(Mc.start);
+			hold(casVystupu, message);
+		}else{
+			message.setCode(Mc.vystupTerm3Hotovy);
 		}
-		message.setCode(Mc.vystupTerm3Hotovy);
-		hold(casVystupu, message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
