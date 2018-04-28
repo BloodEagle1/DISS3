@@ -30,17 +30,21 @@ public class ManagerTerm2 extends Manager
 	//meta! sender="AgentPohybu", id="32", type="Request"
 	public void processNastupTerm2(MessageForm message)
 	{
-		((MyMessage) message).getMinibus().setAktualnaZastavka("Terminal 2");
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesNastupuTerm2);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="AgentPohybu", id="29", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
+		myAgent().getRadZakTerm2().enqueue(((MyMessage)message).getZakaznik());
 	}
 
 	//meta! sender="ProcesNastupuTerm2", id="50", type="Finish"
-	public void processFinish(MessageForm message)
-	{
+	public void processFinish(MessageForm message) {
+		message.setCode(Mc.nastupTerm2);
+		response(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

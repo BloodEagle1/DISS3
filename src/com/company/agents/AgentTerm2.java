@@ -1,6 +1,8 @@
 package com.company.agents;
 
 import OSPABA.*;
+import OSPDataStruct.SimQueue;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
@@ -9,6 +11,9 @@ import com.company.instantAssistants.*;
 //meta! id="27"
 public class AgentTerm2 extends Agent
 {
+
+	private SimQueue<Zakaznik> radZakTerm2;
+
 	public AgentTerm2(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
@@ -32,4 +37,9 @@ public class AgentTerm2 extends Agent
 		addOwnMessage(Mc.nastupTerm2Hotovy);
 	}
 	//meta! tag="end"
+
+
+	public SimQueue<Zakaznik> getRadZakTerm2() {
+		return radZakTerm2;
+	}
 }

@@ -1,6 +1,9 @@
 package com.company.continualAssistants;
 
 import OSPABA.*;
+import OSPRNG.UniformContinuousRNG;
+import com.company.entity.Minibus;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 import OSPABA.Process;
@@ -8,6 +11,9 @@ import OSPABA.Process;
 //meta! id="49"
 public class ProcesNastupuTerm2 extends Process
 {
+
+	private UniformContinuousRNG genNastupu = new UniformContinuousRNG(10.0,14.0);
+
 	public ProcesNastupuTerm2(int id, Simulation mySim, CommonAgent myAgent)
 	{
 		super(id, mySim, myAgent);
@@ -23,6 +29,19 @@ public class ProcesNastupuTerm2 extends Process
 	//meta! sender="AgentTerm2", id="50", type="Start"
 	public void processStart(MessageForm message)
 	{
+		double casNastupu = 0.0;
+		Minibus minibus = ((MyMessage)message).getMinibus();
+		if (minibus.getPocetVolnychMiest() >= myAgent().getRadZakTerm2().getFirst().getPocetCestujucich()){
+			Zakaznik zakaznik = myAgent().getRadZakTerm2().dequeue();
+			minibus.nastupZakaznika(zakaznik);
+			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
+				casNastupu += genNastupu.sample();
+			}
+			message.setCode(Mc.start);
+			hold(casNastupu, message);
+		} else {
+			message.setCode(Mc.nastupTerm2Hotovy);
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -36,6 +55,7 @@ public class ProcesNastupuTerm2 extends Process
 	//meta! sender="AgentTerm2", id="87", type="Notice"
 	public void processNastupTerm2Hotovy(MessageForm message)
 	{
+		assistantFinished(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
