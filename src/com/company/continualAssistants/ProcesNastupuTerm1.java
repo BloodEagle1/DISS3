@@ -2,6 +2,8 @@ package com.company.continualAssistants;
 
 import OSPABA.*;
 import OSPRNG.UniformContinuousRNG;
+import com.company.entity.Minibus;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 import OSPABA.Process;
@@ -28,18 +30,18 @@ public class ProcesNastupuTerm1 extends Process
 	public void processStart(MessageForm message)
 	{
 		double casNastupu = 0.0;
-		((MyMessage)message).setZakaznik(myAgent().getRadZakTerm1().dequeue());
-		if (((MyMessage)message).getMinibus().getPocetVolnychMiest() >= (((MyMessage) message).getZakaznik().getPocetCestujucich())){
-			for (int i = 0; i < (((MyMessage) message).getZakaznik().getPocetCestujucich()); i++) {
+		Minibus minibus = ((MyMessage)message).getMinibus();
+		if (minibus.getPocetVolnychMiest() >= myAgent().getRadZakTerm1().getFirst().getPocetCestujucich()){
+			Zakaznik zakaznik = myAgent().getRadZakTerm1().dequeue();
+			minibus.nastupZakaznika(zakaznik);
+			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
 				casNastupu += genNastupu.sample();
 			}
 			message.setCode(Mc.start);
 			hold(casNastupu, message);
 		} else {
-			((MyMessage)message).setZakaznik(null);
 			message.setCode(Mc.nastupTerm1Hotovy);
 		}
-
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
