@@ -112,7 +112,7 @@ public class ManagerPohybu extends Manager {
 	}
 
 	//meta! sender="AgentModelu", id="18", type="Notice"
-	public void processPrichMinibusu(MessageForm message) {
+	public void processPrichMinibusuAgentModelu(MessageForm message) {
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -121,56 +121,73 @@ public class ManagerPohybu extends Manager {
 		}
 	}
 
+	//meta! sender="AgentMinibusov", id="20", type="Response"
+	public void processPrichMinibusuAgentMinibusov(MessageForm message)
+	{
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init() {
+	public void init()
+	{
 	}
 
 	@Override
-	public void processMessage(MessageForm message) {
-		switch (message.code()) {
-			case Mc.nastupTerm2:
-				processNastupTerm2(message);
-				break;
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.prichZakTerm1:
+			processPrichZakTerm1(message);
+		break;
 
-			case Mc.vystupPozicovna:
-				processVystupPozicovna(message);
-				break;
+		case Mc.prichMinibusu:
+			switch (message.sender().id())
+			{
+			case Id.agentModelu:
+				processPrichMinibusuAgentModelu(message);
+			break;
 
-			case Mc.prichZakPozicovna:
-				processPrichZakPozicovna(message);
-				break;
+			case Id.agentMinibusov:
+				processPrichMinibusuAgentMinibusov(message);
+			break;
+			}
+		break;
 
-			case Mc.vystupTerm3:
-				processVystupTerm3(message);
-				break;
+		case Mc.presunMinibusu:
+			processPresunMinibusu(message);
+		break;
 
-			case Mc.prichZakTerm2:
-				processPrichZakTerm2(message);
-				break;
+		case Mc.nastupTerm1:
+			processNastupTerm1(message);
+		break;
 
-			case Mc.presunMinibusu:
-				processPresunMinibusu(message);
-				break;
+		case Mc.prichZakPozicovna:
+			processPrichZakPozicovna(message);
+		break;
 
-			case Mc.nastupPozicovna:
-				processNastupPozicovna(message);
-				break;
+		case Mc.nastupPozicovna:
+			processNastupPozicovna(message);
+		break;
 
-			case Mc.nastupTerm1:
-				processNastupTerm1(message);
-				break;
+		case Mc.vystupPozicovna:
+			processVystupPozicovna(message);
+		break;
 
-			case Mc.prichZakTerm1:
-				processPrichZakTerm1(message);
-				break;
+		case Mc.prichZakTerm2:
+			processPrichZakTerm2(message);
+		break;
 
-			case Mc.prichMinibusu:
-				processPrichMinibusu(message);
-				break;
+		case Mc.vystupTerm3:
+			processVystupTerm3(message);
+		break;
 
-			default:
-				processDefault(message);
-				break;
+		case Mc.nastupTerm2:
+			processNastupTerm2(message);
+		break;
+
+		default:
+			processDefault(message);
+		break;
 		}
 	}
 	//meta! tag="end"

@@ -56,12 +56,12 @@ public class ManagerTerm3 extends Manager
 	{
 		switch (message.code())
 		{
-		case Mc.vystupTerm3:
-			processVystupTerm3(message);
-		break;
-
 		case Mc.finish:
 			processFinish(message);
+		break;
+
+		case Mc.vystupTerm3:
+			processVystupTerm3(message);
 		break;
 
 		default:

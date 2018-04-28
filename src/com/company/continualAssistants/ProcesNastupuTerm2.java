@@ -44,12 +44,12 @@ public class ProcesNastupuTerm2 extends Process
 	{
 		switch (message.code())
 		{
-		case Mc.nastupTerm2Hotovy:
-			processNastupTerm2Hotovy(message);
-		break;
-
 		case Mc.start:
 			processStart(message);
+		break;
+
+		case Mc.nastupTerm2Hotovy:
+			processNastupTerm2Hotovy(message);
 		break;
 
 		default:

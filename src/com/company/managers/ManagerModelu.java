@@ -11,6 +11,10 @@ public class ManagerModelu extends Manager {
 	public ManagerModelu(int id, Simulation mySim, Agent myAgent) {
 		super(id, mySim, myAgent);
 		init();
+		MyMessage message = new MyMessage(mySim());
+		message.setAddressee(mySim().findAgent(Id.agentOkolia));
+		message.setCode(Mc.init);
+		notice(message);
 	}
 
 	@Override
@@ -58,35 +62,34 @@ public class ManagerModelu extends Manager {
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init() {
-		MyMessage message = new MyMessage(mySim());
-		message.setAddressee(mySim().findAgent(Id.agentOkolia));
-		message.setCode(Mc.init);
-		notice(message);
+	public void init()
+	{
 	}
 
 	@Override
-	public void processMessage(MessageForm message) {
-		switch (message.code()) {
-			case Mc.prichMinibusu:
-				processPrichMinibusu(message);
-				break;
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.prichZakTerm1:
+			processPrichZakTerm1(message);
+		break;
 
-			case Mc.prichZakTerm1:
-				processPrichZakTerm1(message);
-				break;
+		case Mc.prichZakPozicovna:
+			processPrichZakPozicovna(message);
+		break;
 
-			case Mc.prichZakPozicovna:
-				processPrichZakPozicovna(message);
-				break;
+		case Mc.prichZakTerm2:
+			processPrichZakTerm2(message);
+		break;
 
-			case Mc.prichZakTerm2:
-				processPrichZakTerm2(message);
-				break;
+		case Mc.prichMinibusu:
+			processPrichMinibusu(message);
+		break;
 
-			default:
-				processDefault(message);
-				break;
+		default:
+			processDefault(message);
+		break;
 		}
 	}
 	//meta! tag="end"

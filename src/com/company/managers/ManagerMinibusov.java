@@ -39,7 +39,7 @@ public class ManagerMinibusov extends Manager
 
 	}
 
-	//meta! sender="AgentPohybu", id="20", type="Notice"
+	//meta! sender="AgentPohybu", id="20", type="Request"
 	public void processPrichMinibusu(MessageForm message)
 	{
 	}
@@ -62,12 +62,12 @@ public class ManagerMinibusov extends Manager
 	{
 		switch (message.code())
 		{
-		case Mc.presunMinibusu:
-			processPresunMinibusu(message);
-		break;
-
 		case Mc.prichMinibusu:
 			processPrichMinibusu(message);
+		break;
+
+		case Mc.presunMinibusu:
+			processPresunMinibusu(message);
 		break;
 
 		case Mc.finish:

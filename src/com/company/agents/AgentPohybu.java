@@ -31,10 +31,10 @@ public class AgentPohybu extends Agent
 		addOwnMessage(Mc.prichZakPozicovna);
 		addOwnMessage(Mc.nastupPozicovna);
 		addOwnMessage(Mc.prichZakTerm2);
-		addOwnMessage(Mc.vystupTerm3);
 		addOwnMessage(Mc.prichZakTerm1);
-		addOwnMessage(Mc.vystupPozicovna);
+		addOwnMessage(Mc.vystupTerm3);
 		addOwnMessage(Mc.presunMinibusu);
+		addOwnMessage(Mc.vystupPozicovna);
 		addOwnMessage(Mc.prichMinibusu);
 	}
 	//meta! tag="end"

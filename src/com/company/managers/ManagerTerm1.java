@@ -70,12 +70,12 @@ public class ManagerTerm1 extends Manager
 			processPrichZak(message);
 		break;
 
-		case Mc.nastupTerm1:
-			processNastupTerm1(message);
-		break;
-
 		case Mc.finish:
 			processFinish(message);
+		break;
+
+		case Mc.nastupTerm1:
+			processNastupTerm1(message);
 		break;
 
 		default:

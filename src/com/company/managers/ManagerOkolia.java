@@ -94,8 +94,8 @@ public class ManagerOkolia extends Manager
 		case Mc.finish:
 			switch (message.sender().id())
 			{
-			case Id.planovacPrichZakTerm1:
-				processFinishPlanovacPrichZakTerm1(message);
+			case Id.planovacPrichZakTerm2:
+				processFinishPlanovacPrichZakTerm2(message);
 			break;
 
 			case Id.planovacPrichZakPozicovna:
@@ -106,8 +106,8 @@ public class ManagerOkolia extends Manager
 				processFinishPlanovacPrichMinibusov(message);
 			break;
 
-			case Id.planovacPrichZakTerm2:
-				processFinishPlanovacPrichZakTerm2(message);
+			case Id.planovacPrichZakTerm1:
+				processFinishPlanovacPrichZakTerm1(message);
 			break;
 			}
 		break;

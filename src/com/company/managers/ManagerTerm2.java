@@ -61,16 +61,16 @@ public class ManagerTerm2 extends Manager
 	{
 		switch (message.code())
 		{
-		case Mc.nastupTerm2:
-			processNastupTerm2(message);
-		break;
-
 		case Mc.finish:
 			processFinish(message);
 		break;
 
 		case Mc.prichZak:
 			processPrichZak(message);
+		break;
+
+		case Mc.nastupTerm2:
+			processNastupTerm2(message);
 		break;
 
 		default:

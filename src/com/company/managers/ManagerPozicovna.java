@@ -76,16 +76,12 @@ public class ManagerPozicovna extends Manager
 	{
 		switch (message.code())
 		{
-		case Mc.obsluzZak:
-			processObsluzZak(message);
-		break;
-
-		case Mc.vystupPozicovna:
-			processVystupPozicovna(message);
-		break;
-
 		case Mc.nastupPozicovna:
 			processNastupPozicovna(message);
+		break;
+
+		case Mc.obsluzZak:
+			processObsluzZak(message);
 		break;
 
 		case Mc.finish:
@@ -99,6 +95,10 @@ public class ManagerPozicovna extends Manager
 				processFinishProcesVystupuPozicovna(message);
 			break;
 			}
+		break;
+
+		case Mc.vystupPozicovna:
+			processVystupPozicovna(message);
 		break;
 
 		case Mc.prichZak:
