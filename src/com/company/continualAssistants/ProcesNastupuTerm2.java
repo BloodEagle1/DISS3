@@ -12,7 +12,7 @@ import OSPABA.Process;
 public class ProcesNastupuTerm2 extends Process
 {
 
-	private UniformContinuousRNG genNastupu = new UniformContinuousRNG(10.0,14.0);
+	private static UniformContinuousRNG genNastupu = new UniformContinuousRNG(10.0,14.0);
 
 	public ProcesNastupuTerm2(int id, Simulation mySim, CommonAgent myAgent)
 	{
