@@ -113,6 +113,9 @@ public class ManagerPohybu extends Manager {
 
 	//meta! sender="AgentModelu", id="18", type="Notice"
 	public void processPrichMinibusuAgentModelu(MessageForm message) {
+		message.setCode(Mc.prichMinibusu);
+		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		request(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -122,8 +125,10 @@ public class ManagerPohybu extends Manager {
 	}
 
 	//meta! sender="AgentMinibusov", id="20", type="Response"
-	public void processPrichMinibusuAgentMinibusov(MessageForm message)
-	{
+	public void processPrichMinibusuAgentMinibusov(MessageForm message) {
+		message.setCode(Mc.nastupTerm1);
+		message.setAddressee(mySim().findAgent(Id.agentTerm1));
+		request(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
