@@ -30,18 +30,16 @@ public class ProcesNastupuTerm1 extends Process
 	public void processStart(MessageForm message)
 	{
 		double casNastupu = 0.0;
-		Minibus minibus = ((MyMessage)message).getMinibus();
-		if (minibus.getPocetVolnychMiest() >= myAgent().getRadZakTerm1().getFirst().getPocetCestujucich()){
+		if (!myAgent().getRadZakTerm1().isEmpty()){
+			Minibus minibus = ((MyMessage)message).getMinibus();
 			Zakaznik zakaznik = myAgent().getRadZakTerm1().dequeue();
 			minibus.nastupZakaznika(zakaznik);
 			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
 				casNastupu += genNastupu.sample();
 			}
-			message.setCode(Mc.start);
-			hold(casNastupu, message);
-		} else {
-			message.setCode(Mc.nastupTerm1Hotovy);
 		}
+		hold(casNastupu, message);
+		message.setCode(Mc.nastupTerm1Hotovy);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
