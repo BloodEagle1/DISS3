@@ -43,8 +43,15 @@ public class ManagerTerm2 extends Manager
 
 	//meta! sender="ProcesNastupuTerm2", id="50", type="Finish"
 	public void processFinish(MessageForm message) {
-		message.setCode(Mc.nastupTerm2);
-		response(message);
+		if (!myAgent().getRadZakTerm2().isEmpty() &&
+				((MyMessage)message).getMinibus().getPocetVolnychMiest() >= myAgent().getRadZakTerm2().peek().getPocetCestujucich()){
+			message.setCode(Mc.start);
+			message.setAddressee(Id.procesNastupuTerm2);
+			startContinualAssistant(message);
+		}else {
+			message.setCode(Mc.nastupTerm2);
+			response(message);
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
