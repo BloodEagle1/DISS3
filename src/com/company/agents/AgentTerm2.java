@@ -18,6 +18,7 @@ public class AgentTerm2 extends Agent
 	{
 		super(id, mySim, parent);
 		init();
+		this.radZakTerm2 = new SimQueue<>();
 	}
 
 	@Override
