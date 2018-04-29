@@ -3,8 +3,6 @@ package com.company.managers;
 import OSPABA.*;
 import com.company.simulation.*;
 import com.company.agents.*;
-import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
 
 //meta! id="30"
 public class ManagerTerm3 extends Manager

@@ -3,8 +3,6 @@ package com.company.agents;
 import OSPABA.*;
 import com.company.simulation.*;
 import com.company.managers.*;
-import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
 
 //meta! id="2"
 public class AgentModelu extends Agent

@@ -4,7 +4,6 @@ import OSPABA.*;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
 
 //meta! id="1"
 public class AgentOkolia extends Agent

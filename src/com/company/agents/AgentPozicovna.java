@@ -6,7 +6,6 @@ import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
 
 //meta! id="7"
 public class AgentPozicovna extends Agent

@@ -3,9 +3,6 @@ package com.company.managers;
 import OSPABA.*;
 import com.company.simulation.*;
 import com.company.agents.*;
-import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
-
 //meta! id="1"
 public class ManagerOkolia extends Manager
 {

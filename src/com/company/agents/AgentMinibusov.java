@@ -5,7 +5,6 @@ import com.company.entity.Minibus;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
-import com.company.instantAssistants.*;
 
 //meta! id="9"
 public class AgentMinibusov extends Agent
