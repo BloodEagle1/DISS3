@@ -17,11 +17,13 @@ public class Zakaznik extends Entity {
     );
     private final int pocetCestujucich;
     private final double vstupDoSystemu;
+    private boolean prichadzajuci;
 
     public Zakaznik(Simulation mySim) {
         super(mySim);
         this.pocetCestujucich = 1 + (int) empiric.sample();
         this.vstupDoSystemu = mySim.currentTime();
+        this.prichadzajuci = true;
     }
 
     public int getPocetCestujucich() {
@@ -34,5 +36,13 @@ public class Zakaznik extends Entity {
 
     private MySimulation mySimulation() {
         return (MySimulation) mySim();
+    }
+
+    public boolean isPrichadzajuci() {
+        return prichadzajuci;
+    }
+
+    public void setPrichadzajuci(boolean prichadzajuci) {
+        this.prichadzajuci = prichadzajuci;
     }
 }
