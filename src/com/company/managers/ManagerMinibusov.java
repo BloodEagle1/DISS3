@@ -30,18 +30,24 @@ public class ManagerMinibusov extends Manager
 	//meta! sender="AgentPohybu", id="21", type="Request"
 	public void processPresunMinibusu(MessageForm message)
 	{
-
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesPresunu);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="ProcesPresunu", id="64", type="Finish"
 	public void processFinish(MessageForm message)
 	{
-
+		message.setCode(Mc.presunMinibusu);
+		response(message);
 	}
 
 	//meta! sender="AgentPohybu", id="20", type="Request"
 	public void processPrichMinibusu(MessageForm message)
 	{
+		((MyMessage)message).getMinibus().setAktualnaZastavka("Terminal 1");
+		message.setCode(Mc.prichMinibusu);
+		response(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

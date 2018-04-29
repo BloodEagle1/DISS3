@@ -1,6 +1,7 @@
 package com.company.continualAssistants;
 
 import OSPABA.*;
+import com.company.entity.Minibus;
 import com.company.simulation.*;
 import com.company.agents.*;
 import OSPABA.Process;
@@ -23,6 +24,44 @@ public class ProcesPresunu extends Process
 	//meta! sender="AgentMinibusov", id="64", type="Start"
 	public void processStart(MessageForm message)
 	{
+		Minibus minibus = ((MyMessage)message).getMinibus();
+		switch (minibus.getAktualnaZastavka()) {
+			case "Terminal 1":
+				message.setCode(Mc.presunHotovy);
+				hold(dajCasHoldu(0.5), message);
+				minibus.setAktualnaZastavka("Terminal 2");
+				break;
+			case "Terminal 2":
+				message.setCode(Mc.presunHotovy);
+				hold(dajCasHoldu(3.4), message);
+				minibus.setAktualnaZastavka("Pozicovna");
+				break;
+			case "Terminal 3":
+				message.setCode(Mc.presunHotovy);
+				hold(dajCasHoldu(0.9),message);
+				minibus.setAktualnaZastavka("Terminal 1");
+				break;
+			case "Pozicovna": //TODO doriesit
+				if (minibus.isVystup()) {
+					message.setCode(Mc.presunHotovy);
+					hold(dajCasHoldu(0.0),message);
+					minibus.setVystup(false);
+				}else {
+					if (!minibus.getCestujuci().isEmpty()){
+						message.setCode(Mc.presunHotovy);
+						hold(dajCasHoldu(2.9), message);
+						minibus.setVystup(true);
+						minibus.setAktualnaZastavka("Terminal 3");
+					}else{
+						message.setCode(Mc.presunHotovy);
+						hold(dajCasHoldu(2.5), message);
+						minibus.setVystup(true);
+						minibus.setAktualnaZastavka("Terminal 1");
+					}
+
+				}
+				break;
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -36,6 +75,7 @@ public class ProcesPresunu extends Process
 	//meta! sender="AgentMinibusov", id="98", type="Notice"
 	public void processPresunHotovy(MessageForm message)
 	{
+		assistantFinished(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -63,6 +103,10 @@ public class ProcesPresunu extends Process
 	public AgentMinibusov myAgent()
 	{
 		return (AgentMinibusov)super.myAgent();
+	}
+
+	private double dajCasHoldu(double vzdialenost){
+		return (vzdialenost * 3600)/35;
 	}
 
 }
