@@ -12,11 +12,13 @@ public class Minibus extends Entity {
     private String predoslaZastavka;
     private String aktualnaZastavka;
     private int pocetVolnychMiest;
+    private boolean vystup;
 
     public Minibus(Simulation mySim) {
         super(mySim);
         this.cestujuci = new SimQueue<>();
         this.pocetVolnychMiest = pocetMiest;
+        this.vystup = true;
     }
 
     public SimQueue<Zakaznik> getCestujuci() {
@@ -53,5 +55,13 @@ public class Minibus extends Entity {
 
     public int getPocetVolnychMiest() {
         return pocetVolnychMiest;
+    }
+
+    public boolean isVystup() {
+        return vystup;
+    }
+
+    public void setVystup(boolean vystup) {
+        this.vystup = vystup;
     }
 }
