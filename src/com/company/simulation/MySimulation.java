@@ -22,6 +22,7 @@ public class MySimulation extends Simulation
 	{
 		super.prepareReplication();
 		// Reset entities, queues, local statistics, etc...
+		agentModelu().spustiSimulaciu();
 	}
 
 	@Override

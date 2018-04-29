@@ -9,10 +9,6 @@ public class ManagerModelu extends Manager {
 	public ManagerModelu(int id, Simulation mySim, Agent myAgent) {
 		super(id, mySim, myAgent);
 		init();
-		MyMessage message = new MyMessage(mySim());
-		message.setAddressee(mySim().findAgent(Id.agentOkolia));
-		message.setCode(Mc.init);
-		notice(message);
 	}
 
 	@Override
@@ -69,6 +65,10 @@ public class ManagerModelu extends Manager {
 	{
 		switch (message.code())
 		{
+		case Mc.init:
+			message.setAddressee(mySim().findAgent(Id.agentOkolia));
+			notice(message);
+		break;
 		case Mc.prichZakTerm1:
 			processPrichZakTerm1(message);
 		break;

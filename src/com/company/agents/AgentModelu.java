@@ -32,6 +32,14 @@ public class AgentModelu extends Agent
 		addOwnMessage(Mc.prichZakTerm2);
 		addOwnMessage(Mc.prichZakTerm1);
 		addOwnMessage(Mc.prichMinibusu);
+		addOwnMessage(Mc.init);
 	}
 	//meta! tag="end"
+
+	public void spustiSimulaciu() {
+		MyMessage message = new MyMessage(mySim());
+		message.setCode(Mc.init);
+		message.setAddressee(this);
+		manager().notice(message);
+	}
 }
