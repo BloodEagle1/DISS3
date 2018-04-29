@@ -20,20 +20,6 @@ public class MyMessage extends MessageForm
 		// copy() is called in superclass
 	}
 
-	public MyMessage(Simulation mySim, Zakaznik zakaznik)
-	{
-		super(mySim);
-		this.zakaznik = zakaznik;
-		this.minibus = null;
-	}
-
-	public MyMessage(Simulation mySim, Minibus minibus)
-	{
-		super(mySim);
-		this.zakaznik = null;
-		this.minibus = minibus;
-	}
-
 	@Override
 	public MessageForm createCopy()
 	{
