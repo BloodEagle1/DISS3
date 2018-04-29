@@ -38,8 +38,8 @@ public class ProcesNastupuTerm2 extends Process
 				casNastupu += genNastupu.sample();
 			}
 		}
-		hold(casNastupu, message);
 		message.setCode(Mc.nastupTerm2Hotovy);
+		hold(casNastupu, message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
