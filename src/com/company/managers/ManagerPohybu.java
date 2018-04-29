@@ -98,11 +98,12 @@ public class ManagerPohybu extends Manager {
 				request(message);
 				break;
 			case "Pozicovna":
-				if (!((MyMessage) message).getMinibus().getCestujuci().isEmpty()){
+				if (((MyMessage) message).getMinibus().isVystup()){
 					message.setCode(Mc.vystupPozicovna);
 					message.setAddressee(mySim().findAgent(Id.agentPozicovna));
 					request(message);
-				}else {
+				}
+				else {
 					message.setCode(Mc.nastupPozicovna);
 					message.setAddressee(mySim().findAgent(Id.agentPozicovna));
 					request(message);
