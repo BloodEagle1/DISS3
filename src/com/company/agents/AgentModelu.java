@@ -20,7 +20,7 @@ public class AgentModelu extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
-		MyMessage msg = new MyMessage(mySim(), null);
+		MyMessage msg = new MyMessage(mySim());
 		msg.setAddressee(this);
 		msg.setCode(Mc.init);
 		manager().notice(msg);
