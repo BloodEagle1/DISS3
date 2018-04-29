@@ -64,7 +64,9 @@ public class PlanovacPrichZakPozicovna extends Scheduler {
 		MyMessage msg = new MyMessage((MyMessage) message);
 		hold(dajCasHoldu(), msg);
 
-		((MyMessage)message).setZakaznik(new Zakaznik(mySim()));
+		Zakaznik zakaznik = new Zakaznik(mySim());
+		zakaznik.setPrichadzajuci(false);
+		((MyMessage)message).setZakaznik(zakaznik);
 		assistantFinished(message);
     }
 
