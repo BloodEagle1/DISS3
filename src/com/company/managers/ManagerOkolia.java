@@ -27,13 +27,13 @@ public class ManagerOkolia extends Manager
 	//meta! sender="AgentModelu", id="15", type="Notice"
 	public void processInit(MessageForm message) {
 		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakTerm1));
-		startContinualAssistant(message);
+		startContinualAssistant(message.createCopy());
 		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakTerm2));
-		startContinualAssistant(message);
+		startContinualAssistant(message.createCopy());
 		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakPozicovna));
-		startContinualAssistant(message);
+		startContinualAssistant(message.createCopy());
 		message.setAddressee(myAgent().findAssistant(Id.planovacPrichMinibusov));
-		startContinualAssistant(message);
+		startContinualAssistant(message.createCopy());
 	}
 
 	//meta! sender="PlanovacPrichZakPozicovna", id="42", type="Finish"
