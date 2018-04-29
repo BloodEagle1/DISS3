@@ -1,6 +1,7 @@
 package com.company.continualAssistants;
 
 import OSPABA.*;
+import com.company.entity.Minibus;
 import com.company.simulation.*;
 import com.company.agents.*;
 
@@ -22,6 +23,8 @@ public class PlanovacPrichMinibusov extends Scheduler
 	//meta! sender="AgentOkolia", id="44", type="Start"
 	public void processStart(MessageForm message)
 	{
+		message.setCode(Mc.novyAutobus);
+		hold(15*60, message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -35,6 +38,11 @@ public class PlanovacPrichMinibusov extends Scheduler
 	//meta! sender="AgentOkolia", id="84", type="Notice"
 	public void processNovyAutobus(MessageForm message)
 	{
+		MyMessage msg = new MyMessage((MyMessage) message);
+		hold(15*60, msg);
+
+		((MyMessage)message).setMinibus(new Minibus(mySim()));
+		assistantFinished(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
