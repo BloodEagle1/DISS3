@@ -9,10 +9,14 @@ import com.company.instantAssistants.*;
 //meta! id="8"
 public class AgentObsluhy extends Agent
 {
+	private static final int pocetPracovnikov = Config.pocetPracovnikov;
+	private int pocetVolnychPracovnikov;
+
 	public AgentObsluhy(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
 		init();
+		this.pocetVolnychPracovnikov = pocetPracovnikov;
 	}
 
 	@Override
@@ -31,4 +35,21 @@ public class AgentObsluhy extends Agent
 		addOwnMessage(Mc.obsluhaHotova);
 	}
 	//meta! tag="end"
+
+
+	public static int getPocetPracovnikov() {
+		return pocetPracovnikov;
+	}
+
+	public int getPocetVolnychPracovnikov() {
+		return pocetVolnychPracovnikov;
+	}
+
+	public void zvysPocetVolnychPracovnikov(){
+		pocetVolnychPracovnikov++;
+	}
+
+	public void znizPocetVolnychPracovnikov(){
+		pocetVolnychPracovnikov++;
+	}
 }

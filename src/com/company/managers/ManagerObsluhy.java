@@ -30,11 +30,18 @@ public class ManagerObsluhy extends Manager
 	//meta! sender="AgentPozicovna", id="24", type="Request"
 	public void processObsluzZak(MessageForm message)
 	{
+		myAgent().znizPocetVolnychPracovnikov();
+		message.setCode(Mc.start);
+		message.setAddressee(Id.procesObsluhy);
+		startContinualAssistant(message);
 	}
 
 	//meta! sender="ProcesObsluhy", id="61", type="Finish"
 	public void processFinish(MessageForm message)
 	{
+		myAgent().zvysPocetVolnychPracovnikov();
+		message.setCode(Mc.obsluzZak);
+		response(message);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
