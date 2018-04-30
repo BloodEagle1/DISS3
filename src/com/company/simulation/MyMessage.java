@@ -18,6 +18,8 @@ public class MyMessage extends MessageForm
 	{
 		super(original);
 		// copy() is called in superclass
+		zakaznik = original.zakaznik;
+		minibus = original.minibus;
 	}
 
 	@Override

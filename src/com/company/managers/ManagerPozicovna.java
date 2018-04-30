@@ -84,6 +84,12 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="ProcesVystupuPozicovna", id="58", type="Finish"
 	public void processFinishProcesVystupuPozicovna(MessageForm message)
 	{
+		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0 ){
+			message.setCode(Mc.obsluzZak);
+			message.setAddressee(Id.agentObsluhy);
+			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
+			request(message.createCopy());
+		}
 		if (!((MyMessage)message).getMinibus().getCestujuci().isEmpty()){
 			message.setCode(Mc.start);
 			message.setAddressee(Id.procesVystupuPozicovna);

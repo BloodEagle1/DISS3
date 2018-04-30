@@ -9,8 +9,8 @@ public class MySimulation extends Simulation
 {
 	private int pocetReplikacii = 1;
 	private int pocetMiestMinibusu = 12;
-	private int pocetPracovnikov = 18;
-	private int pocetMinibusov = 7;
+	private int pocetPracovnikov = 7;
+	private int pocetMinibusov = 2;
 
 	private Stat velkostRaduStatTerm1;
 	private Stat velkostRaduStatTerm2;

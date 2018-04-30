@@ -18,10 +18,10 @@ public class ProcesObsluhy extends Process
 	//out_druha TRIA(2.9, 4.3, 4.8)
 	private static Random pravdepodobnostIn = new Random();
 	private static Random pravdepodobnostOut = new Random();
-	private static TriangularRNG triangularRNGInPrvaPolka = new TriangularRNG(1.6,2.02,3.0);
-	private static TriangularRNG triangularRNGInDruhaPolka = new TriangularRNG(3.1,4.58,5.1);
-	private static TriangularRNG triangularRNGOutPrvaPolka = new TriangularRNG(0.999,1.25,2.1);
-	private static TriangularRNG triangularRNGOutDruhaPolka = new TriangularRNG(2.9,4.3,4.8);
+	private static TriangularRNG triangularRNGInPrvaPolka = new TriangularRNG(1.6*60,2.02*60,3.0*60);
+	private static TriangularRNG triangularRNGInDruhaPolka = new TriangularRNG(3.1*60,4.58*60,5.1*60);
+	private static TriangularRNG triangularRNGOutPrvaPolka = new TriangularRNG(0.999*60,1.25*60,2.1*60);
+	private static TriangularRNG triangularRNGOutDruhaPolka = new TriangularRNG(2.9*60,4.3*60,4.8*60);
 
  	public ProcesObsluhy(int id, Simulation mySim, CommonAgent myAgent)
 	{

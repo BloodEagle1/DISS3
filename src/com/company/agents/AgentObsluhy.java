@@ -1,6 +1,8 @@
 package com.company.agents;
 
 import OSPABA.*;
+import OSPStat.Stat;
+import OSPStat.WStat;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
@@ -10,6 +12,7 @@ public class AgentObsluhy extends Agent
 {
 	private int pocetPracovnikov;
 	private int pocetVolnychPracovnikov;
+	private Stat vytazeniePracovnikov;
 
 	public AgentObsluhy(int id, Simulation mySim, Agent parent)
 	{
@@ -24,6 +27,7 @@ public class AgentObsluhy extends Agent
 		super.prepareReplication();
 		// Setup component for the next replication
 		this.pocetVolnychPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
+		this.vytazeniePracovnikov = new Stat();
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -46,10 +50,16 @@ public class AgentObsluhy extends Agent
 	}
 
 	public void zvysPocetVolnychPracovnikov(){
+		vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
 		pocetVolnychPracovnikov++;
 	}
 
 	public void znizPocetVolnychPracovnikov(){
-		pocetVolnychPracovnikov++;
+		vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
+		pocetVolnychPracovnikov--;
+	}
+
+	public Stat getVytazeniePracovnikov() {
+		return vytazeniePracovnikov;
 	}
 }
