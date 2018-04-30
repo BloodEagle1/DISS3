@@ -38,13 +38,14 @@ public class PlanovacPrichMinibusov extends Scheduler
 	//meta! sender="AgentOkolia", id="84", type="Notice"
 	public void processNovyAutobus(MessageForm message)
 	{
-		((MySimulation)mySim()).agentMinibusov().zvysVypusteneMinibusy();
-		if (((MySimulation)mySim()).agentMinibusov().getVypusteneMinibusy() < Config.pocetMinibusov){
+		Minibus minibus = new Minibus(mySim());
+		((MySimulation)mySim()).agentMinibusov().zvysVypusteneMinibusy(minibus);
+		if (((MySimulation)mySim()).agentMinibusov().getVypusteneMinibusy() < ((MySimulation) mySim()).getPocetMinibusov() -1){
 			MyMessage msg = new MyMessage((MyMessage) message);
 			hold(15*60, msg);
 		}
 
-		((MyMessage)message).setMinibus(new Minibus(mySim()));
+		((MyMessage)message).setMinibus(minibus);
 		assistantFinished(message);
 	}
 

@@ -16,14 +16,15 @@ public class AgentMinibusov extends Agent
 	{
 		super(id, mySim, parent);
 		init();
-		this.minibusy = new Minibus[Config.pocetMinibusov];
 	}
 
 	@Override
 	public void prepareReplication()
 	{
 		super.prepareReplication();
-		// Setup component for the next replication
+
+		this.minibusy = new Minibus[((MySimulation) mySim()).getPocetMinibusov()];
+		vypusteneMinibusy = 0;
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -46,7 +47,8 @@ public class AgentMinibusov extends Agent
 		return vypusteneMinibusy;
 	}
 
-	public void zvysVypusteneMinibusy(){
+	public void zvysVypusteneMinibusy(Minibus minibus){
+		minibusy[vypusteneMinibusy] = minibus;
 		vypusteneMinibusy++;
 	}
 }

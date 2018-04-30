@@ -8,14 +8,14 @@ import com.company.continualAssistants.*;
 //meta! id="8"
 public class AgentObsluhy extends Agent
 {
-	private static final int pocetPracovnikov = Config.pocetPracovnikov;
+	private int pocetPracovnikov;
 	private int pocetVolnychPracovnikov;
 
 	public AgentObsluhy(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
 		init();
-		this.pocetVolnychPracovnikov = pocetPracovnikov;
+		this.pocetPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
 	}
 
 	@Override
@@ -23,6 +23,7 @@ public class AgentObsluhy extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
+		this.pocetVolnychPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -36,7 +37,7 @@ public class AgentObsluhy extends Agent
 	//meta! tag="end"
 
 
-	public static int getPocetPracovnikov() {
+	public int getPocetPracovnikov() {
 		return pocetPracovnikov;
 	}
 

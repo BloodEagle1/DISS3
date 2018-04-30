@@ -1,10 +1,37 @@
 package com.company.simulation;
 
 import OSPABA.*;
+import OSPStat.Stat;
+import OSPStat.WStat;
 import com.company.agents.*;
 
 public class MySimulation extends Simulation
 {
+	private int pocetReplikacii = 1;
+	private int pocetMiestMinibusu = 12;
+	private int pocetPracovnikov = 18;
+	private int pocetMinibusov = 7;
+
+	private Stat velkostRaduStatTerm1;
+	private Stat velkostRaduStatTerm2;
+	private Stat velkostRaduStatPozicovna;
+
+	public int getPocetReplikacii() {
+		return pocetReplikacii;
+	}
+
+	public int getPocetMiestMinibusu() {
+		return pocetMiestMinibusu;
+	}
+
+	public int getPocetPracovnikov() {
+		return pocetPracovnikov;
+	}
+
+	public int getPocetMinibusov() {
+		return pocetMinibusov;
+	}
+
 	public MySimulation()
 	{
 		init();
@@ -15,6 +42,9 @@ public class MySimulation extends Simulation
 	{
 		super.prepareSimulation();
 		// Create global statistcis
+		velkostRaduStatTerm1 = new Stat();
+		velkostRaduStatTerm2 = new Stat();
+		velkostRaduStatPozicovna = new Stat();
 	}
 
 	@Override
@@ -22,7 +52,9 @@ public class MySimulation extends Simulation
 	{
 		super.prepareReplication();
 		// Reset entities, queues, local statistics, etc...
+
 		agentModelu().spustiSimulaciu();
+
 	}
 
 	@Override
@@ -30,6 +62,13 @@ public class MySimulation extends Simulation
 	{
 		// Collect local statistics into global, update UI, etc...
 		super.replicationFinished();
+		WStat radStat = agentTerm1().getRadZakTerm1().lengthStatistic();
+		velkostRaduStatTerm1.addSample(radStat.mean());
+		WStat radStat1 = agentTerm2().getRadZakTerm2().lengthStatistic();
+		velkostRaduStatTerm2.addSample(radStat1.mean());
+		WStat radStat2 = agentPozicovna().getRadZakPozicovna().lengthStatistic();
+		velkostRaduStatPozicovna.addSample(radStat2.mean());
+
 	}
 
 	@Override
@@ -37,6 +76,10 @@ public class MySimulation extends Simulation
 	{
 		// Dysplay simulation results
 		super.simulationFinished();
+		System.out.println(currentTime());
+		System.out.println("Velkost radu terminal1: " + velkostRaduStatTerm1.mean());
+		System.out.println("Velkost radu terminal2: " + velkostRaduStatTerm2.mean());
+		System.out.println("Velkost radu pozicovna: " + velkostRaduStatPozicovna.mean());
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

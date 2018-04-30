@@ -30,10 +30,10 @@ public class ProcesNastupuPozicovna extends Process
 	public void processStart(MessageForm message)
 	{
 		double casNastupu = 0.0;
-		if (!myAgent().getRadZakPozicovna().isEmpty()){
+		if (!myAgent().getRadZakNaOdvoz().isEmpty()){
 			Minibus minibus = ((MyMessage)message).getMinibus();
 
-			Zakaznik zakaznik = myAgent().getRadZakPozicovna().dequeue();
+			Zakaznik zakaznik = myAgent().getRadZakNaOdvoz().dequeue();
 			minibus.nastupZakaznika(zakaznik);
 			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
 				casNastupu += genNastupu.sample();

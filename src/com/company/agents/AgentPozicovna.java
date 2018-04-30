@@ -2,6 +2,7 @@ package com.company.agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.WStat;
 import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.managers.*;
@@ -12,12 +13,12 @@ public class AgentPozicovna extends Agent
 {
 
 	private SimQueue<Zakaznik> radZakPozicovna;
+	private SimQueue<Zakaznik> radZakNaOdvoz;
 
 	public AgentPozicovna(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
 		init();
-		this.radZakPozicovna = new SimQueue<>();
 	}
 
 	@Override
@@ -25,6 +26,8 @@ public class AgentPozicovna extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
+		this.radZakPozicovna = new SimQueue<>(new WStat(mySim()));
+		this.radZakNaOdvoz = new SimQueue<>(new WStat(mySim()));
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -45,5 +48,9 @@ public class AgentPozicovna extends Agent
 
 	public SimQueue<Zakaznik> getRadZakPozicovna() {
 		return radZakPozicovna;
+	}
+
+	public SimQueue<Zakaznik> getRadZakNaOdvoz() {
+		return radZakNaOdvoz;
 	}
 }

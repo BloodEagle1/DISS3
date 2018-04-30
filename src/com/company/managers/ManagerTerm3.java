@@ -36,8 +36,14 @@ public class ManagerTerm3 extends Manager
 	//meta! sender="ProcesVystupuTerm3", id="53", type="Finish"
 	public void processFinish(MessageForm message)
 	{
-		message.setCode(Mc.vystupTerm3);
-		response(message);
+		if (!((MyMessage)message).getMinibus().getCestujuci().isEmpty()){
+			message.setCode(Mc.start);
+			message.setAddressee(Id.procesVystupuTerm3);
+			startContinualAssistant(message);
+		}else {
+			message.setCode(Mc.vystupTerm3);
+			response(message);
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

@@ -4,11 +4,12 @@ import OSPABA.Entity;
 import OSPABA.Simulation;
 import OSPDataStruct.SimQueue;
 import com.company.simulation.Config;
+import com.company.simulation.MySimulation;
 
 public class Minibus extends Entity {
 
     private SimQueue<Zakaznik> cestujuci;
-    private static final int pocetMiest = Config.pocetMiestMinibusu;
+    private final int pocetMiest;
     private String predoslaZastavka;
     private String aktualnaZastavka;
     private int pocetVolnychMiest;
@@ -17,8 +18,10 @@ public class Minibus extends Entity {
     public Minibus(Simulation mySim) {
         super(mySim);
         this.cestujuci = new SimQueue<>();
+        this.pocetMiest = ((MySimulation) mySim()).getPocetMiestMinibusu();
         this.pocetVolnychMiest = pocetMiest;
         this.vystup = true;
+        this.predoslaZastavka = "dafa";
     }
 
     public SimQueue<Zakaznik> getCestujuci() {

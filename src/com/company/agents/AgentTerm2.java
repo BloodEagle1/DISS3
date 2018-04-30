@@ -2,6 +2,7 @@ package com.company.agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.WStat;
 import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.managers.*;
@@ -17,7 +18,6 @@ public class AgentTerm2 extends Agent
 	{
 		super(id, mySim, parent);
 		init();
-		this.radZakTerm2 = new SimQueue<>();
 	}
 
 	@Override
@@ -25,6 +25,7 @@ public class AgentTerm2 extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
+		this.radZakTerm2 = new SimQueue<>(new WStat(mySim()));
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

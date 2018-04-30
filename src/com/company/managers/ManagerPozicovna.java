@@ -28,7 +28,7 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="AgentPohybu", id="22", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
-		if(((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
+		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
 			message.setCode(Mc.obsluzZak);
 			message.setAddressee(Id.agentObsluhy);
 			request(message);
@@ -40,7 +40,10 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="AgentObsluhy", id="24", type="Response"
 	public void processObsluzZak(MessageForm message)
 	{
-		if(((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
+		if (!((MyMessage)message).getZakaznik().isPrichadzajuci()){
+			myAgent().getRadZakNaOdvoz().enqueue(((MyMessage)message).getZakaznik());
+		}
+		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0 ){
 			message.setCode(Mc.obsluzZak);
 			message.setAddressee(Id.agentObsluhy);
 			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
@@ -67,8 +70,8 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="ProcesNastupuPozicovna", id="56", type="Finish"
 	public void processFinishProcesNastupuPozicovna(MessageForm message)
 	{
-		if (!myAgent().getRadZakPozicovna().isEmpty() &&
-				((MyMessage)message).getMinibus().getPocetVolnychMiest() >= myAgent().getRadZakPozicovna().peek().getPocetCestujucich()){
+		if (!myAgent().getRadZakNaOdvoz().isEmpty() &&
+				((MyMessage)message).getMinibus().getPocetVolnychMiest() >= myAgent().getRadZakNaOdvoz().peek().getPocetCestujucich()){
 			message.setCode(Mc.start);
 			message.setAddressee(Id.procesNastupuPozicovna);
 			startContinualAssistant(message);

@@ -11,26 +11,26 @@ public class PlanovacPrichZakTerm1 extends Scheduler {
 
 	private static final int HODINA = 3600;
 	private static final double[] vstupy = {4.0,8.0,12.0,15.0,18.0,14.0,13.0,10.0,4.0,6.0,10.0,14.0,16.0,15.0,7.0,3.0,4.0,2.0};
-	private static ExponentialRNG exponentialRNG1 = new ExponentialRNG(vstupy[0] / HODINA );
-	private static ExponentialRNG exponentialRNG2 = new ExponentialRNG(vstupy[1] / HODINA );
-	private static ExponentialRNG exponentialRNG3 = new ExponentialRNG(vstupy[2] / HODINA );
-	private static ExponentialRNG exponentialRNG4 = new ExponentialRNG(vstupy[3] / HODINA );
-	private static ExponentialRNG exponentialRNG5 = new ExponentialRNG(vstupy[4] / HODINA );
-	private static ExponentialRNG exponentialRNG6 = new ExponentialRNG(vstupy[5] / HODINA );
-	private static ExponentialRNG exponentialRNG7 = new ExponentialRNG(vstupy[6] / HODINA );
-	private static ExponentialRNG exponentialRNG8 = new ExponentialRNG(vstupy[7] / HODINA );
-	private static ExponentialRNG exponentialRNG9 = new ExponentialRNG(vstupy[8] / HODINA );
-	private static ExponentialRNG exponentialRNG10 = new ExponentialRNG(vstupy[9] / HODINA );
-	private static ExponentialRNG exponentialRNG11 = new ExponentialRNG(vstupy[10] / HODINA );
-	private static ExponentialRNG exponentialRNG12 = new ExponentialRNG(vstupy[11] / HODINA );
-	private static ExponentialRNG exponentialRNG13 = new ExponentialRNG(vstupy[12] / HODINA );
-	private static ExponentialRNG exponentialRNG14 = new ExponentialRNG(vstupy[13] / HODINA );
-	private static ExponentialRNG exponentialRNG15 = new ExponentialRNG(vstupy[14] / HODINA );
-	private static ExponentialRNG exponentialRNG16 = new ExponentialRNG(vstupy[15] / HODINA );
-	private static ExponentialRNG exponentialRNG17 = new ExponentialRNG(vstupy[16] / HODINA );
-	private static ExponentialRNG exponentialRNG18 = new ExponentialRNG(vstupy[17] / HODINA );
+	private static ExponentialRNG exponentialRNG1 = new ExponentialRNG(HODINA / vstupy[0]);
+	private static ExponentialRNG exponentialRNG2 = new ExponentialRNG(HODINA / vstupy[1]);
+	private static ExponentialRNG exponentialRNG3 = new ExponentialRNG(HODINA / vstupy[2]);
+	private static ExponentialRNG exponentialRNG4 = new ExponentialRNG(HODINA / vstupy[3]);
+	private static ExponentialRNG exponentialRNG5 = new ExponentialRNG(HODINA / vstupy[4]);
+	private static ExponentialRNG exponentialRNG6 = new ExponentialRNG(HODINA / vstupy[5]);
+	private static ExponentialRNG exponentialRNG7 = new ExponentialRNG(HODINA / vstupy[6]);
+	private static ExponentialRNG exponentialRNG8 = new ExponentialRNG(HODINA / vstupy[7]);
+	private static ExponentialRNG exponentialRNG9 = new ExponentialRNG(HODINA / vstupy[8]);
+	private static ExponentialRNG exponentialRNG10 = new ExponentialRNG(HODINA / vstupy[9]);
+	private static ExponentialRNG exponentialRNG11 = new ExponentialRNG(HODINA / vstupy[10]);
+	private static ExponentialRNG exponentialRNG12 = new ExponentialRNG(HODINA / vstupy[11]);
+	private static ExponentialRNG exponentialRNG13 = new ExponentialRNG(HODINA / vstupy[12]);
+	private static ExponentialRNG exponentialRNG14 = new ExponentialRNG(HODINA / vstupy[13]);
+	private static ExponentialRNG exponentialRNG15 = new ExponentialRNG(HODINA / vstupy[14]);
+	private static ExponentialRNG exponentialRNG16 = new ExponentialRNG(HODINA / vstupy[15]);
+	private static ExponentialRNG exponentialRNG17 = new ExponentialRNG(HODINA / vstupy[16]);
+	private static ExponentialRNG exponentialRNG18 = new ExponentialRNG(HODINA / vstupy[17]);
 
-	private ExponentialRNG[] genVstupov = {
+	private static ExponentialRNG[] genVstupov = {
 			exponentialRNG1,exponentialRNG2,exponentialRNG3, exponentialRNG4,
 			exponentialRNG5,exponentialRNG6,exponentialRNG7,exponentialRNG8,
 			exponentialRNG9,exponentialRNG10,exponentialRNG11,exponentialRNG12,
@@ -50,7 +50,9 @@ public class PlanovacPrichZakTerm1 extends Scheduler {
 	//meta! sender="AgentOkolia", id="38", type="Start"
 	public void processStart(MessageForm message) {
 		message.setCode(Mc.novyZakaznik);
-		hold(dajCasHoldu(), message);
+		double cas = dajCasHoldu();
+		if (cas > 0)
+			hold(cas, message);
 
     }
 
@@ -64,7 +66,9 @@ public class PlanovacPrichZakTerm1 extends Scheduler {
 	public void processNovyZakaznik(MessageForm message)
 	{
 		MyMessage msg = new MyMessage((MyMessage) message);
-		hold(dajCasHoldu(), msg);
+		double cas = dajCasHoldu();
+		if (cas > 0)
+			hold(cas, msg);
 
 		((MyMessage)message).setZakaznik(new Zakaznik(mySim()));
 		assistantFinished(message);
@@ -97,17 +101,22 @@ public class PlanovacPrichZakTerm1 extends Scheduler {
     }
 
     private int dajIndexGeneratoraVstupu(double cas){
-		return (int)Math.round((cas / (15 * 60))%17);
+		return (int)Math.floor((cas / (15 * 60))%17);
 	}
 
 	private double dajCasHoldu(){
 		int indexGenVstupu = dajIndexGeneratoraVstupu(mySim().currentTime());
 		double vysledokGeneratora = genVstupov[indexGenVstupu].sample();
+		if (vysledokGeneratora > 900)
+			vysledokGeneratora = 900;
 		double casPoHolde = mySim().currentTime() + vysledokGeneratora;
 		int indexGenVstupuPoHolde = dajIndexGeneratoraVstupu(casPoHolde);
 
 		if (indexGenVstupuPoHolde != indexGenVstupu && vstupy[indexGenVstupu] < vstupy[indexGenVstupuPoHolde]){
-			return (((casPoHolde - (indexGenVstupuPoHolde * (15*60))) + genVstupov[indexGenVstupuPoHolde].sample()) / 2) + (((15 * 60)*indexGenVstupuPoHolde)-mySim().currentTime());
+			double vysledokNovehoGeneratora = genVstupov[indexGenVstupuPoHolde].sample();
+			if (vysledokNovehoGeneratora > 900)
+				vysledokNovehoGeneratora = 900;
+			return (((casPoHolde - (indexGenVstupuPoHolde * (15*60))) + vysledokNovehoGeneratora) / 2) + (((15 * 60)*indexGenVstupuPoHolde)-mySim().currentTime());
 		}else {
 			return vysledokGeneratora;
 		}
