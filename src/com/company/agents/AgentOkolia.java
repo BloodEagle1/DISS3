@@ -1,6 +1,7 @@
 package com.company.agents;
 
 import OSPABA.*;
+import com.company.entity.Minibus;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
@@ -11,6 +12,7 @@ public class AgentOkolia extends Agent
 
 	private int pocetZakaznikov;
 	private int pocetZakaznikovVratenia;
+	private int vypusteneMinibusy;
 
 	public AgentOkolia(int id, Simulation mySim, Agent parent)
 	{
@@ -24,6 +26,7 @@ public class AgentOkolia extends Agent
 		super.prepareReplication();
 		this.pocetZakaznikov = 0;
 		this.pocetZakaznikovVratenia = 0;
+		vypusteneMinibusy = 0;
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -54,5 +57,13 @@ public class AgentOkolia extends Agent
 
 	public void zvysPocetZakaznikovVratenia() {
 		pocetZakaznikovVratenia++;
+	}
+
+	public int getVypusteneMinibusy() {
+		return vypusteneMinibusy;
+	}
+
+	public void zvysVypusteneMinibusy(Minibus minibus){
+		vypusteneMinibusy++;
 	}
 }

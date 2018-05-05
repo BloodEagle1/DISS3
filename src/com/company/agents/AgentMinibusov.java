@@ -6,11 +6,12 @@ import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
 
+import java.util.LinkedList;
+
 //meta! id="9"
 public class AgentMinibusov extends Agent
 {
-	private Minibus[] minibusy;
-	private int vypusteneMinibusy;
+	private LinkedList<Minibus> minibusy;
 
 	public AgentMinibusov(int id, Simulation mySim, Agent parent)
 	{
@@ -23,8 +24,7 @@ public class AgentMinibusov extends Agent
 	{
 		super.prepareReplication();
 
-		this.minibusy = new Minibus[((MySimulation) mySim()).getPocetMinibusov()];
-		vypusteneMinibusy = 0;
+		this.minibusy = new LinkedList<>();
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -39,16 +39,11 @@ public class AgentMinibusov extends Agent
 	//meta! tag="end"
 
 
-	public Minibus[] getMinibusy() {
+	public LinkedList<Minibus> getMinibusy() {
 		return minibusy;
 	}
 
-	public int getVypusteneMinibusy() {
-		return vypusteneMinibusy;
-	}
-
-	public void zvysVypusteneMinibusy(Minibus minibus){
-		minibusy[vypusteneMinibusy] = minibus;
-		vypusteneMinibusy++;
+	public void vlozMinibus(Minibus minibus){
+		minibusy.add(minibus);
 	}
 }

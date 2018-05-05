@@ -39,8 +39,8 @@ public class PlanovacPrichMinibusov extends Scheduler
 	public void processNovyAutobus(MessageForm message)
 	{
 		Minibus minibus = new Minibus(mySim());
-		((MySimulation)mySim()).agentMinibusov().zvysVypusteneMinibusy(minibus);
-		if (((MySimulation)mySim()).agentMinibusov().getVypusteneMinibusy() < ((MySimulation) mySim()).getPocetMinibusov() -1){
+		myAgent().zvysVypusteneMinibusy(minibus);
+		if (myAgent().getVypusteneMinibusy() < ((MySimulation) mySim()).getPocetMinibusov() -1){
 			MyMessage msg = new MyMessage((MyMessage) message);
 			hold(15*60, msg);
 		}

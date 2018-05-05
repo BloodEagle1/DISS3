@@ -43,6 +43,7 @@ public class ManagerMinibusov extends Manager
 	//meta! sender="AgentPohybu", id="20", type="Request"
 	public void processPrichMinibusu(MessageForm message)
 	{
+		myAgent().vlozMinibus(((MyMessage)message).getMinibus());
 		((MyMessage)message).getMinibus().setAktualnaZastavka("Terminal 1");
 		message.setCode(Mc.prichMinibusu);
 		response(message);
