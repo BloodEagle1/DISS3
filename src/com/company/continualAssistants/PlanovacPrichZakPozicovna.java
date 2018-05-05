@@ -113,12 +113,10 @@ public class PlanovacPrichZakPozicovna extends Scheduler {
 		int indexGenVstupuPoHolde = dajIndexGeneratoraVstupu(casPoHolde);
 
 		if (indexGenVstupuPoHolde != indexGenVstupu && vstupy[indexGenVstupu] < vstupy[indexGenVstupuPoHolde]){
-			double vysledokNovehoGeneratora = genVstupov[indexGenVstupuPoHolde].sample();
+			double vysledokNovehoGeneratora = genVstupov[(indexGenVstupu+1)].sample();
 			if (vysledokNovehoGeneratora > 900)
 				vysledokNovehoGeneratora = 900;
-			double pom = (((casPoHolde - (indexGenVstupuPoHolde * (15*60))) + vysledokNovehoGeneratora) / 2) + (((15 * 60)*indexGenVstupuPoHolde)-mySim().currentTime());
-			//return (((casPoHolde - (indexGenVstupuPoHolde * (15*60))) + genVstupov[indexGenVstupuPoHolde].sample()) / 2) + (((15 * 60)*indexGenVstupuPoHolde)-mySim().currentTime());
-			return pom;
+			return (((casPoHolde - ((indexGenVstupu+1) * (15*60))) + vysledokNovehoGeneratora) / 2) + (((15 * 60)*(indexGenVstupu+1))-mySim().currentTime());
 		}else {
 			return vysledokGeneratora;
 		}
