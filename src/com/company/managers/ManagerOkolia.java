@@ -26,13 +26,13 @@ public class ManagerOkolia extends Manager
 
 	//meta! sender="AgentModelu", id="15", type="Notice"
 	public void processInit(MessageForm message) {
-		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakTerm1));
+		message.setAddressee(Id.planovacPrichZakTerm1);
 		startContinualAssistant(message.createCopy());
-		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakTerm2));
+		message.setAddressee(Id.planovacPrichZakTerm2);
 		startContinualAssistant(message.createCopy());
-		message.setAddressee(myAgent().findAssistant(Id.planovacPrichZakPozicovna));
+		message.setAddressee(Id.planovacPrichZakPozicovna);
 		startContinualAssistant(message.createCopy());
-		message.setAddressee(myAgent().findAssistant(Id.planovacPrichMinibusov));
+		message.setAddressee(Id.planovacPrichMinibusov);
 		startContinualAssistant(message.createCopy());
 	}
 
@@ -40,7 +40,7 @@ public class ManagerOkolia extends Manager
 	public void processFinishPlanovacPrichZakPozicovna(MessageForm message) {
 		myAgent().zvysPocetZakaznikovVratenia();
 
-		message.setAddressee(mySim().findAgent(Id.agentModelu));
+		message.setAddressee(Id.agentModelu);
 		message.setCode(Mc.prichZakPozicovna);
 		notice(message);
 	}
@@ -49,14 +49,14 @@ public class ManagerOkolia extends Manager
 	public void processFinishPlanovacPrichZakTerm1(MessageForm message) {
 		myAgent().zvysPocetZakaznikov();
 
-		message.setAddressee(mySim().findAgent(Id.agentModelu));
+		message.setAddressee(Id.agentModelu);
 		message.setCode(Mc.prichZakTerm1);
 		notice(message);
 	}
 
 	//meta! sender="PlanovacPrichMinibusov", id="44", type="Finish"
 	public void processFinishPlanovacPrichMinibusov(MessageForm message) {
-		message.setAddressee(mySim().findAgent(Id.agentModelu));
+		message.setAddressee(Id.agentModelu);
 		message.setCode(Mc.prichMinibusu);
 		notice(message);
 	}
@@ -65,7 +65,7 @@ public class ManagerOkolia extends Manager
 	public void processFinishPlanovacPrichZakTerm2(MessageForm message) {
 		myAgent().zvysPocetZakaznikov();
 
-		message.setAddressee(mySim().findAgent(Id.agentModelu));
+		message.setAddressee(Id.agentModelu);
 		message.setCode(Mc.prichZakTerm2);
 		notice(message);
 	}

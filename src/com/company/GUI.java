@@ -221,7 +221,7 @@ public class GUI implements ISimDelegate {
                 }
 
 
-                sliderRychlost.setValue(1000);
+                sliderRychlost.setValue(60);
                 sliderFrekvencia.setValue(1);
 
                 pozicovna.simulateAsync(1, 5.5*60*60);
@@ -235,29 +235,19 @@ public class GUI implements ISimDelegate {
                 JOptionPane.showMessageDialog(panel, "Nespravne parametre");
             }
         });
-//        btnPauza.addActionListener(e -> {
-//            if (!zastavenie){
-//                zastavenie = true;
-//                pozicovna.zastav();
-//                btnPauza.setText("pokracuj");
-//            }else {
-//                zastavenie = false;
-//                pozicovna.pokracuj();
-//                btnPauza.setText("pauza");
-//            }
-//        });
-        sliderRychlost.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100);
+        btnPauza.addActionListener(e -> {
+            if (!zastavenie){
+                zastavenie = true;
+                pozicovna.pauseSimulation();
+                btnPauza.setText("pokracuj");
+            }else {
+                zastavenie = false;
+                pozicovna.resumeSimulation();
+                btnPauza.setText("pauza");
             }
         });
-        sliderFrekvencia.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100);
-            }
-        });
+        sliderRychlost.addChangeListener(e -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100));
+        sliderFrekvencia.addChangeListener(e -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100));
     }
 
     public static void main(String[] args) {
@@ -303,18 +293,18 @@ public class GUI implements ISimDelegate {
 
     private void vypisVysledkyVCase(MySimulation pozicovna) {
 
-        jlVelkostRaduTerminal1.setText((Math.round(pozicovna.agentTerm1().getRadZakTerm1().lengthStatistic().mean() * 10000d) / 10000d) + "");
-        jlVelkostRaduTerminal2.setText((Math.round(pozicovna.agentTerm2().getRadZakTerm2().lengthStatistic().mean() * 10000d) / 10000d) + "");
+        jlVelkostRaduTerminal1.setText((Math.round(pozicovna.agentTerm1().getRadZakTerm1().size() * 10000d) / 10000d) + "");
+        jlVelkostRaduTerminal2.setText((Math.round(pozicovna.agentTerm2().getRadZakTerm2().size() * 10000d) / 10000d) + "");
         jlVelkostRaduPozicovna.setText((Math.round(pozicovna.agentPozicovna().getRadZakPozicovna().lengthStatistic().mean() * 10000d) / 10000d) + "");
         jlVolnyPracovnici.setText(pozicovna.agentObsluhy().getPocetVolnychPracovnikov() + "");
-//        jlPocetZakVstup.setText(pozicovna.getZakVstup() + "");
-//        jlVybavenyZak.setText(pozicovna.getZakSystemu() + "");
-//        jlStatPriemCasVSysteme.setText((Math.round(pozicovna.statCasuVSysteme() * 10000d) / 10000d) + " min");
+        jlPocetZakVstup.setText(pozicovna.agentOkolia().getPocetZakaznikov() + "");
+        jlVybavenyZak.setText(pozicovna.agentModelu().getPocetObsluzenychZakaznikov() + "");
+        jlStatPriemCasVSysteme.setText((Math.round((pozicovna.agentModelu().getStatCasVSystemePrichZak().mean()/60)* 10000d) / 10000d) + " min");
 //        jlStatPriemRadObsluha.setText((Math.round(pozicovna.statZakVRadeObsluha() * 10000d) / 10000d) + "");
 //        jlStatPriemCasVRadeObsluha.setText((Math.round(pozicovna.statCasuVRadeObsluha() * 10000d) / 10000d) + " min");
         jlStatPriemObsadenostPrac.setText((Math.round(pozicovna.agentObsluhy().getVytazeniePracovnikov().mean() * 10000d) / 10000d) + "");
-//        jlStatPriemRadTerminal1.setText((Math.round(pozicovna.statZakVRadeTerminal1() * 10000d) / 10000d) + "");
-//        jlStatPriemRadTerminal2.setText((Math.round(pozicovna.statZakVRadeTerminal2() * 10000d) / 10000d) + "");
+        jlStatPriemRadTerminal1.setText((Math.round(pozicovna.agentTerm1().getRadZakTerm1().lengthStatistic().mean() * 10000d) / 10000d) + "");
+        jlStatPriemRadTerminal2.setText((Math.round(pozicovna.agentTerm2().getRadZakTerm2().lengthStatistic().mean() * 10000d) / 10000d) + "");
 //        jlStatPriemCasVRadeTerminal1.setText((Math.round(pozicovna.statCasuVRadeTerminal1() * 10000d) / 10000d) + " min");
 //        jlStatPriemCasVRadeTerminal2.setText((Math.round(pozicovna.statCasuVRadeTerminal2() * 10000d) / 10000d) + " min");
 

@@ -1,6 +1,7 @@
 package com.company.managers;
 
 import OSPABA.*;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 
@@ -24,28 +25,28 @@ public class ManagerModelu extends Manager {
 	//meta! sender="AgentOkolia", id="12", type="Notice"
 	public void processPrichZakPozicovna(MessageForm message) {
 		message.setCode(Mc.prichZakPozicovna);
-		message.setAddressee(mySim().findAgent(Id.agentPohybu));
+		message.setAddressee(Id.agentPohybu);
 		notice(message);
 	}
 
 	//meta! sender="AgentOkolia", id="13", type="Notice"
 	public void processPrichZakTerm2(MessageForm message) {
 		message.setCode(Mc.prichZakTerm2);
-		message.setAddressee(mySim().findAgent(Id.agentPohybu));
+		message.setAddressee(Id.agentPohybu);
 		notice(message);
 	}
 
 	//meta! sender="AgentOkolia", id="10", type="Notice"
 	public void processPrichZakTerm1(MessageForm message) {
 		message.setCode(Mc.prichZakTerm1);
-		message.setAddressee(mySim().findAgent(Id.agentPohybu));
+		message.setAddressee(Id.agentPohybu);
 		notice(message);
 	}
 
 	//meta! sender="AgentOkolia", id="14", type="Notice"
 	public void processPrichMinibusu(MessageForm message) {
 		message.setCode(Mc.prichMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentPohybu));
+		message.setAddressee(Id.agentPohybu);
 		notice(message);
 	}
 
@@ -58,12 +59,19 @@ public class ManagerModelu extends Manager {
 	//meta! sender="AgentPohybu", id="105", type="Notice"
 	public void processOdchodZakaznika(MessageForm message)
 	{
+		Zakaznik zakaznik = ((MyMessage)message).getZakaznik();
+		myAgent().zvysPocetObsluzenychZakaznikov();
+		if (zakaznik.isPrichadzajuci()){
+			myAgent().pridajDoStatCasVSystemeZakPrich(mySim().currentTime() - zakaznik.getVstupDoSystemu());
+		} else {
+			myAgent().pridajDoStatCasVSystemeZakOdch(mySim().currentTime() - zakaznik.getVstupDoSystemu());
+		}
 	}
 
 	//meta! sender="AgentPohybu", id="111", type="Notice"
 	public void processInit(MessageForm message)
 	{
-		message.setAddressee(mySim().findAgent(Id.agentOkolia));
+		message.setAddressee(Id.agentOkolia);
 		notice(message);
 	}
 

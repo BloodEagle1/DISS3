@@ -39,6 +39,10 @@ public class ManagerPozicovna extends Manager
 	{
 		if (!((MyMessage)message).getZakaznik().isPrichadzajuci()){
 			myAgent().getRadZakNaOdvoz().enqueue(((MyMessage)message).getZakaznik());
+		} else {
+			message.setCode(Mc.odchodZakaznika);
+			message.setAddressee(Id.agentPohybu);
+			notice(message.createCopy());
 		}
 		message.setCode(Mc.pocetPracovnikovVolnych);
 		message.setAddressee(Id.agentObsluhy);

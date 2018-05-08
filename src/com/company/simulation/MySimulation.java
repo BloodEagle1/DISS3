@@ -15,6 +15,8 @@ public class MySimulation extends Simulation
 	private Stat velkostRaduStatTerm1;
 	private Stat velkostRaduStatTerm2;
 	private Stat velkostRaduStatPozicovna;
+	private Stat casVSystemePrichZak;
+	private Stat casVSystemeOdchZak;
 
 	public int getPocetReplikacii() {
 		return pocetReplikacii;
@@ -45,6 +47,8 @@ public class MySimulation extends Simulation
 		velkostRaduStatTerm1 = new Stat();
 		velkostRaduStatTerm2 = new Stat();
 		velkostRaduStatPozicovna = new Stat();
+		casVSystemePrichZak = new Stat();
+		casVSystemeOdchZak = new Stat();
 	}
 
 	@Override
@@ -68,7 +72,8 @@ public class MySimulation extends Simulation
 		velkostRaduStatTerm2.addSample(radStat1.mean());
 		WStat radStat2 = agentPozicovna().getRadZakPozicovna().lengthStatistic();
 		velkostRaduStatPozicovna.addSample(radStat2.mean());
-
+		casVSystemePrichZak.addSample(agentModelu().getStatCasVSystemePrichZak().mean());
+		casVSystemePrichZak.addSample(agentModelu().getStatCasVSystemeOdchZak().mean());
 	}
 
 	@Override
@@ -76,11 +81,11 @@ public class MySimulation extends Simulation
 	{
 		// Dysplay simulation results
 		super.simulationFinished();
-		System.out.println(currentTime());
-		System.out.println("Velkost radu terminal1: " + velkostRaduStatTerm1.mean());
-		System.out.println("Velkost radu terminal2: " + velkostRaduStatTerm2.mean());
-		System.out.println("Velkost radu pozicovna: " + velkostRaduStatPozicovna.mean());
-		System.out.println(velkostRaduStatPozicovna.sampleSize());
+//		System.out.println(currentTime());
+//		System.out.println("Velkost radu terminal1: " + velkostRaduStatTerm1.mean());
+//		System.out.println("Velkost radu terminal2: " + velkostRaduStatTerm2.mean());
+//		System.out.println("Velkost radu pozicovna: " + velkostRaduStatPozicovna.mean());
+//		System.out.println(velkostRaduStatPozicovna.sampleSize());
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

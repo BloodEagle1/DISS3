@@ -24,56 +24,56 @@ public class ManagerPohybu extends Manager {
 	//meta! sender="AgentTerm1", id="31", type="Response"
 	public void processNastupTerm1(MessageForm message) {
 		message.setCode(Mc.presunMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
 	//meta! sender="AgentTerm2", id="32", type="Response"
 	public void processNastupTerm2(MessageForm message) {
 		message.setCode(Mc.presunMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
 	//meta! sender="AgentModelu", id="16", type="Notice"
 	public void processPrichZakPozicovna(MessageForm message) {
 		message.setCode(Mc.prichZak);
-		message.setAddressee(mySim().findAgent(Id.agentPozicovna));
+		message.setAddressee(Id.agentPozicovna);
 		notice(message);
 	}
 
 	//meta! sender="AgentPozicovna", id="35", type="Response"
 	public void processNastupPozicovna(MessageForm message) {
 		message.setCode(Mc.presunMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
 	//meta! sender="AgentModelu", id="17", type="Notice"
 	public void processPrichZakTerm2(MessageForm message) {
 		message.setCode(Mc.prichZak);
-		message.setAddressee(mySim().findAgent(Id.agentTerm2));
+		message.setAddressee(Id.agentTerm2);
 		notice(message);
 	}
 
 	//meta! sender="AgentTerm3", id="33", type="Response"
 	public void processVystupTerm3(MessageForm message) {
 		message.setCode(Mc.presunMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
 	//meta! sender="AgentModelu", id="19", type="Notice"
 	public void processPrichZakTerm1(MessageForm message) {
 		message.setCode(Mc.prichZak);
-		message.setAddressee(mySim().findAgent(Id.agentTerm1));
+		message.setAddressee(Id.agentTerm1);
 		notice(message);
 	}
 
 	//meta! sender="AgentPozicovna", id="34", type="Response"
 	public void processVystupPozicovna(MessageForm message) {
 		message.setCode(Mc.presunMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
@@ -82,28 +82,28 @@ public class ManagerPohybu extends Manager {
 		switch (((MyMessage) message).getMinibus().getAktualnaZastavka()) {
 			case "Terminal 1":
 				message.setCode(Mc.nastupTerm1);
-				message.setAddressee(mySim().findAgent(Id.agentTerm1));
+				message.setAddressee(Id.agentTerm1);
 				request(message);
 				break;
 			case "Terminal 2":
 				message.setCode(Mc.nastupTerm2);
-				message.setAddressee(mySim().findAgent(Id.agentTerm2));
+				message.setAddressee(Id.agentTerm2);
 				request(message);
 				break;
 			case "Terminal 3":
 				message.setCode(Mc.vystupTerm3);
-				message.setAddressee(mySim().findAgent(Id.agentTerm3));
+				message.setAddressee(Id.agentTerm3);
 				request(message);
 				break;
 			case "Pozicovna":
 				if (((MyMessage) message).getMinibus().isVystup()){
 					message.setCode(Mc.vystupPozicovna);
-					message.setAddressee(mySim().findAgent(Id.agentPozicovna));
+					message.setAddressee(Id.agentPozicovna);
 					request(message);
 				}
 				else {
 					message.setCode(Mc.nastupPozicovna);
-					message.setAddressee(mySim().findAgent(Id.agentPozicovna));
+					message.setAddressee(Id.agentPozicovna);
 					request(message);
 				}
 				break;
@@ -113,7 +113,7 @@ public class ManagerPohybu extends Manager {
 	//meta! sender="AgentModelu", id="18", type="Notice"
 	public void processPrichMinibusuAgentModelu(MessageForm message) {
 		message.setCode(Mc.prichMinibusu);
-		message.setAddressee(mySim().findAgent(Id.agentMinibusov));
+		message.setAddressee(Id.agentMinibusov);
 		request(message);
 	}
 
@@ -126,18 +126,24 @@ public class ManagerPohybu extends Manager {
 	//meta! sender="AgentMinibusov", id="20", type="Response"
 	public void processPrichMinibusuAgentMinibusov(MessageForm message) {
 		message.setCode(Mc.nastupTerm1);
-		message.setAddressee(mySim().findAgent(Id.agentTerm1));
+		message.setAddressee(Id.agentTerm1);
 		request(message);
 	}
 
 	//meta! sender="AgentPozicovna", id="103", type="Notice"
 	public void processOdchodZakaznikaAgentPozicovna(MessageForm message)
 	{
+		message.setCode(Mc.odchodZakaznika);
+		message.setAddressee(Id.agentModelu);
+		notice(message);
 	}
 
 	//meta! sender="AgentTerm3", id="104", type="Notice"
 	public void processOdchodZakaznikaAgentTerm3(MessageForm message)
 	{
+		message.setCode(Mc.odchodZakaznika);
+		message.setAddressee(Id.agentModelu);
+		notice(message);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

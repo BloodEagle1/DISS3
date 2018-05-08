@@ -63,7 +63,7 @@ public class AgentOkolia extends Agent
 		return vypusteneMinibusy;
 	}
 
-	public void zvysVypusteneMinibusy(Minibus minibus){
+	public void zvysVypusteneMinibusy(){
 		vypusteneMinibusy++;
 	}
 }
