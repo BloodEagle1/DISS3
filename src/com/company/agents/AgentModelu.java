@@ -28,11 +28,12 @@ public class AgentModelu extends Agent
 	private void init()
 	{
 		new ManagerModelu(Id.managerModelu, mySim(), this);
+		addOwnMessage(Mc.init);
 		addOwnMessage(Mc.prichZakPozicovna);
 		addOwnMessage(Mc.prichZakTerm2);
 		addOwnMessage(Mc.prichZakTerm1);
 		addOwnMessage(Mc.prichMinibusu);
-		addOwnMessage(Mc.init);
+		addOwnMessage(Mc.odchodZakaznika);
 	}
 	//meta! tag="end"
 

@@ -55,6 +55,18 @@ public class ManagerModelu extends Manager {
 		}
 	}
 
+	//meta! sender="AgentPohybu", id="105", type="Notice"
+	public void processOdchodZakaznika(MessageForm message)
+	{
+	}
+
+	//meta! sender="AgentPohybu", id="111", type="Notice"
+	public void processInit(MessageForm message)
+	{
+		message.setAddressee(mySim().findAgent(Id.agentOkolia));
+		notice(message);
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -65,16 +77,20 @@ public class ManagerModelu extends Manager {
 	{
 		switch (message.code())
 		{
-		case Mc.init:
-			message.setAddressee(mySim().findAgent(Id.agentOkolia));
-			notice(message);
-		break;
 		case Mc.prichZakTerm1:
 			processPrichZakTerm1(message);
 		break;
 
 		case Mc.prichZakPozicovna:
 			processPrichZakPozicovna(message);
+		break;
+
+		case Mc.init:
+			processInit(message);
+		break;
+
+		case Mc.odchodZakaznika:
+			processOdchodZakaznika(message);
 		break;
 
 		case Mc.prichZakTerm2:

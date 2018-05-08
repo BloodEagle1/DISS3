@@ -130,6 +130,16 @@ public class ManagerPohybu extends Manager {
 		request(message);
 	}
 
+	//meta! sender="AgentPozicovna", id="103", type="Notice"
+	public void processOdchodZakaznikaAgentPozicovna(MessageForm message)
+	{
+	}
+
+	//meta! sender="AgentTerm3", id="104", type="Notice"
+	public void processOdchodZakaznikaAgentTerm3(MessageForm message)
+	{
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -183,6 +193,19 @@ public class ManagerPohybu extends Manager {
 
 		case Mc.vystupTerm3:
 			processVystupTerm3(message);
+		break;
+
+		case Mc.odchodZakaznika:
+			switch (message.sender().id())
+			{
+			case Id.agentPozicovna:
+				processOdchodZakaznikaAgentPozicovna(message);
+			break;
+
+			case Id.agentTerm3:
+				processOdchodZakaznikaAgentTerm3(message);
+			break;
+			}
 		break;
 
 		case Mc.nastupTerm2:

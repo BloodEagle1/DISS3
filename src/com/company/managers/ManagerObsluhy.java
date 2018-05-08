@@ -50,6 +50,13 @@ public class ManagerObsluhy extends Manager
 		}
 	}
 
+	//meta! sender="AgentPozicovna", id="102", type="Request"
+	public void processPocetPracovnikovVolnych(MessageForm message)
+	{
+		((MyMessage)message).setPocetVolnychPracovnikov(myAgent().getPocetVolnychPracovnikov());
+		response(message);
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -62,6 +69,10 @@ public class ManagerObsluhy extends Manager
 		{
 		case Mc.obsluzZak:
 			processObsluzZak(message);
+		break;
+
+		case Mc.pocetPracovnikovVolnych:
+			processPocetPracovnikovVolnych(message);
 		break;
 
 		case Mc.finish:

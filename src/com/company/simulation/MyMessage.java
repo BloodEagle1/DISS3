@@ -8,6 +8,7 @@ public class MyMessage extends MessageForm
 {
 	private Zakaznik zakaznik;
 	private Minibus minibus;
+	private int pocetVolnychPracovnikov;
 
 	public MyMessage(Simulation sim)
 	{
@@ -50,5 +51,13 @@ public class MyMessage extends MessageForm
 
 	public Minibus getMinibus() {
 		return minibus;
+	}
+
+	public int getPocetVolnychPracovnikov() {
+		return pocetVolnychPracovnikov;
+	}
+
+	public void setPocetVolnychPracovnikov(int pocetVolnychPracovnikov) {
+		this.pocetVolnychPracovnikov = pocetVolnychPracovnikov;
 	}
 }

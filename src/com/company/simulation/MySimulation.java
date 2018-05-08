@@ -7,7 +7,7 @@ import com.company.agents.*;
 
 public class MySimulation extends Simulation
 {
-	private int pocetReplikacii = 1;
+	private int pocetReplikacii = 100;
 	private int pocetMiestMinibusu = 12;
 	private int pocetPracovnikov = 7;
 	private int pocetMinibusov = 2;
@@ -80,6 +80,7 @@ public class MySimulation extends Simulation
 		System.out.println("Velkost radu terminal1: " + velkostRaduStatTerm1.mean());
 		System.out.println("Velkost radu terminal2: " + velkostRaduStatTerm2.mean());
 		System.out.println("Velkost radu pozicovna: " + velkostRaduStatPozicovna.mean());
+		System.out.println(velkostRaduStatPozicovna.sampleSize());
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

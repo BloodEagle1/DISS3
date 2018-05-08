@@ -37,6 +37,7 @@ public class AgentObsluhy extends Agent
 		new ProcesObsluhy(Id.procesObsluhy, mySim(), this);
 		addOwnMessage(Mc.obsluzZak);
 		addOwnMessage(Mc.obsluhaHotova);
+		addOwnMessage(Mc.pocetPracovnikovVolnych);
 	}
 	//meta! tag="end"
 

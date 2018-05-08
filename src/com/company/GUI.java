@@ -10,6 +10,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -219,11 +221,11 @@ public class GUI implements ISimDelegate {
                 }
 
 
-                sliderRychlost.setValue(1);
-                sliderFrekvencia.setValue(100);
+                sliderRychlost.setValue(1000);
+                sliderFrekvencia.setValue(1);
 
                 pozicovna.simulateAsync(1, 5.5*60*60);
-                pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), sliderRychlost.getValue()));
+                pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue()/100));
 
                 pozicovna.onSimulationDidFinish(this::refresh);
 
@@ -244,6 +246,18 @@ public class GUI implements ISimDelegate {
 //                btnPauza.setText("pauza");
 //            }
 //        });
+        sliderRychlost.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100);
+            }
+        });
+        sliderFrekvencia.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100);
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -322,7 +336,7 @@ public class GUI implements ISimDelegate {
         cal.add(Calendar.SECOND, (int)(pozicovna.currentTime()));
         String newTime = df.format(cal.getTime());
         jlCas.setText(newTime);
-
+        pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue()/100);
 //        for (int i = model.getRowCount() -1; i >= 0; i--) {
 //            Object[] row = getNewRow();
 //            model.setValueAt(row[0], i, 0);

@@ -33,10 +33,10 @@ public class AgentOkolia extends Agent
 	private void init()
 	{
 		new ManagerOkolia(Id.managerOkolia, mySim(), this);
-		new PlanovacPrichZakTerm2(Id.planovacPrichZakTerm2, mySim(), this);
-		new PlanovacPrichMinibusov(Id.planovacPrichMinibusov, mySim(), this);
 		new PlanovacPrichZakTerm1(Id.planovacPrichZakTerm1, mySim(), this);
 		new PlanovacPrichZakPozicovna(Id.planovacPrichZakPozicovna, mySim(), this);
+		new PlanovacPrichZakTerm2(Id.planovacPrichZakTerm2, mySim(), this);
+		new PlanovacPrichMinibusov(Id.planovacPrichMinibusov, mySim(), this);
 		addOwnMessage(Mc.init);
 		addOwnMessage(Mc.novyAutobus);
 		addOwnMessage(Mc.novyZakaznik);

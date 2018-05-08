@@ -41,6 +41,7 @@ public class AgentPozicovna extends Agent
 		addOwnMessage(Mc.nastupPozicovna);
 		addOwnMessage(Mc.vystupPozicovnaHotovy);
 		addOwnMessage(Mc.nastupPoziconaHotovy);
+		addOwnMessage(Mc.pocetPracovnikovVolnych);
 		addOwnMessage(Mc.vystupPozicovna);
 	}
 	//meta! tag="end"

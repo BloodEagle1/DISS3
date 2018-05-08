@@ -28,13 +28,10 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="AgentPohybu", id="22", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
-		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0){
-			message.setCode(Mc.obsluzZak);
-			message.setAddressee(Id.agentObsluhy);
-			request(message);
-		}else {
-			myAgent().getRadZakPozicovna().enqueue(((MyMessage)message).getZakaznik());
-		}
+		myAgent().getRadZakPozicovna().enqueue(((MyMessage)message).getZakaznik());
+		message.setCode(Mc.pocetPracovnikovVolnych);
+		message.setAddressee(Id.agentObsluhy);
+		request(message.createCopy());
 	}
 
 	//meta! sender="AgentObsluhy", id="24", type="Response"
@@ -43,12 +40,9 @@ public class ManagerPozicovna extends Manager
 		if (!((MyMessage)message).getZakaznik().isPrichadzajuci()){
 			myAgent().getRadZakNaOdvoz().enqueue(((MyMessage)message).getZakaznik());
 		}
-		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0 ){
-			message.setCode(Mc.obsluzZak);
-			message.setAddressee(Id.agentObsluhy);
-			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
-			request(message);
-		}
+		message.setCode(Mc.pocetPracovnikovVolnych);
+		message.setAddressee(Id.agentObsluhy);
+		request(message);
 	}
 
 	//meta! sender="AgentPohybu", id="35", type="Request"
@@ -84,12 +78,10 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="ProcesVystupuPozicovna", id="58", type="Finish"
 	public void processFinishProcesVystupuPozicovna(MessageForm message)
 	{
-		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MySimulation)mySim()).agentObsluhy().getPocetVolnychPracovnikov() > 0 ){
-			message.setCode(Mc.obsluzZak);
-			message.setAddressee(Id.agentObsluhy);
-			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
-			request(message.createCopy());
-		}
+		message.setCode(Mc.pocetPracovnikovVolnych);
+		message.setAddressee(Id.agentObsluhy);
+		request(message.createCopy());
+
 		if (!((MyMessage)message).getMinibus().getCestujuci().isEmpty()){
 			message.setCode(Mc.start);
 			message.setAddressee(Id.procesVystupuPozicovna);
@@ -105,6 +97,17 @@ public class ManagerPozicovna extends Manager
 	{
 		switch (message.code())
 		{
+		}
+	}
+
+	//meta! sender="AgentObsluhy", id="102", type="Response"
+	public void processPocetPracovnikovVolnych(MessageForm message)
+	{
+		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MyMessage)message).getPocetVolnychPracovnikov() > 0 ){
+			message.setCode(Mc.obsluzZak);
+			message.setAddressee(Id.agentObsluhy);
+			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
+			request(message.createCopy());
 		}
 	}
 
@@ -137,6 +140,10 @@ public class ManagerPozicovna extends Manager
 				processFinishProcesVystupuPozicovna(message);
 			break;
 			}
+		break;
+
+		case Mc.pocetPracovnikovVolnych:
+			processPocetPracovnikovVolnych(message);
 		break;
 
 		case Mc.vystupPozicovna:

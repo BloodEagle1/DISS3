@@ -34,6 +34,7 @@ public class AgentPohybu extends Agent
 		addOwnMessage(Mc.presunMinibusu);
 		addOwnMessage(Mc.vystupPozicovna);
 		addOwnMessage(Mc.prichMinibusu);
+		addOwnMessage(Mc.odchodZakaznika);
 	}
 	//meta! tag="end"
 }
