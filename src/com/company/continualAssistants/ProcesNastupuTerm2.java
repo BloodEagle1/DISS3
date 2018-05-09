@@ -33,6 +33,7 @@ public class ProcesNastupuTerm2 extends Process
 		if (!myAgent().getRadZakTerm2().isEmpty()){
 			Minibus minibus = ((MyMessage)message).getMinibus();
 			Zakaznik zakaznik = myAgent().getRadZakTerm2().dequeue();
+			myAgent().pridajDoStatCasVRade(mySim().currentTime() - zakaznik.getVstupDoRaduTerm2());
 			minibus.nastupZakaznika(zakaznik);
 			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
 				casNastupu += genNastupu.sample();

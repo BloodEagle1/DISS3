@@ -3,6 +3,7 @@ package com.company.agents;
 import OSPABA.*;
 import OSPStat.Stat;
 import OSPStat.WStat;
+import com.company.entity.Pracovnik;
 import com.company.simulation.*;
 import com.company.managers.*;
 import com.company.continualAssistants.*;
@@ -13,12 +14,12 @@ public class AgentObsluhy extends Agent
 	private int pocetPracovnikov;
 	private int pocetVolnychPracovnikov;
 	private Stat vytazeniePracovnikov;
+	private Pracovnik[] pracovnici;
 
 	public AgentObsluhy(int id, Simulation mySim, Agent parent)
 	{
 		super(id, mySim, parent);
 		init();
-		this.pocetPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
 	}
 
 	@Override
@@ -26,8 +27,14 @@ public class AgentObsluhy extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
-		this.pocetVolnychPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
+		this.pocetPracovnikov = ((MySimulation) mySim()).getPocetPracovnikov();
+		this.pocetVolnychPracovnikov = pocetPracovnikov;
 		this.vytazeniePracovnikov = new Stat();
+		this.pracovnici = new Pracovnik[pocetPracovnikov];
+		for (int i = 0; i < pocetPracovnikov; i++) {
+			pracovnici[i] = new Pracovnik(i, mySim());
+		}
+
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -41,6 +48,10 @@ public class AgentObsluhy extends Agent
 	}
 	//meta! tag="end"
 
+
+	public Pracovnik[] getPracovnici() {
+		return pracovnici;
+	}
 
 	public int getPocetPracovnikov() {
 		return pocetPracovnikov;
@@ -62,5 +73,16 @@ public class AgentObsluhy extends Agent
 
 	public Stat getVytazeniePracovnikov() {
 		return vytazeniePracovnikov;
+	}
+
+	public Pracovnik dajVolnehoPracovnika(){
+		Pracovnik volnyPracovnik = null;
+		for (int i = 0; i < pocetPracovnikov; i++) {
+			if (!pracovnici[i].isObsadeny()){
+				volnyPracovnik = pracovnici[i];
+				break;
+			}
+		}
+		return volnyPracovnik;
 	}
 }

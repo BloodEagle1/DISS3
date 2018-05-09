@@ -4,25 +4,22 @@ import OSPABA.ISimDelegate;
 import OSPABA.SimState;
 import OSPABA.Simulation;
 import com.company.entity.Minibus;
+import com.company.entity.Pracovnik;
 import com.company.simulation.MySimulation;
 import org.jfree.chart.*;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.function.Consumer;
 
 public class GUI implements ISimDelegate {
     private JButton btnStart;
@@ -31,7 +28,7 @@ public class GUI implements ISimDelegate {
     private JTextField jtfPocetMinibusov;
     private JTextField jtfPocetPracovnikov;
     private JTextField jtfPocetReplikacii;
-    private JLabel jlRepStatPriemCasVSysteme;
+    private JLabel jlRepStatPriemCasVSystemePrich;
     private JLabel jlRepStatPriemRadObsluhy;
     private JLabel jlRepStatPriemCasVRadeNaObsluhu;
     private JLabel jlRepStatPriemObsadenostPracovnikov;
@@ -44,9 +41,9 @@ public class GUI implements ISimDelegate {
     private JLabel jlVelkostRaduPozicovna;
     private JLabel jlVolnyPracovnici;
     private JLabel jlPocetZakVstup;
-    private JLabel jlVybavenyZak;
+    private JLabel jlVybavenyZakPrich;
     private JButton btnStartReplikacia;
-    private JLabel jlStatPriemCasVSysteme;
+    private JLabel jlStatPriemCasVSystemePrich;
     private JLabel jlStatPriemRadObsluha;
     private JLabel jlStatPriemCasVRadeObsluha;
     private JLabel jlStatPriemObsadenostPrac;
@@ -64,6 +61,13 @@ public class GUI implements ISimDelegate {
     private JLabel jlStatPriemCasVRadeTerminal2;
     private JLabel jlCas;
     private JButton btnPauza;
+    private JTable jtPracovnici;
+    private JLabel jlVybavenyZakOdch;
+    private JLabel jlStatPriemCasVSystemeOdch;
+    private JLabel jlRepStatPriemCasVSystemeOdch;
+    private JLabel jlPocetReplikacii;
+    private JLabel jlAktualnaReplikacia;
+    private JButton pauzaButton;
     private JFreeChart lineChart;
     private XYSeries series;
     private JFreeChart lineChart2;
@@ -73,6 +77,7 @@ public class GUI implements ISimDelegate {
     private double horna1;
     private double horna2;
     private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel1;
     private SimpleDateFormat df;
     private Calendar cal;
     private MySimulation pozicovna;
@@ -88,8 +93,16 @@ public class GUI implements ISimDelegate {
         String col[] = {"Minibus", "Predosla zastavka", "Aktualna zastavka", "Pocet cestujucich"};
         tableModel = new DefaultTableModel(col, 0);
         jtMinibusy.setModel(tableModel);
+        String col1[] = {"Pracovnik", "Obsadenost"};
+        tableModel1 = new DefaultTableModel(col1, 0);
+        jtPracovnici.setModel(tableModel1);
+
+        sliderRychlost.setValue(60);
+        sliderFrekvencia.setValue(1);
+
         pozicovna = new MySimulation();
         pozicovna.registerDelegate(this);
+        pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue()/100));
 
         jpZavislostMinibusov.setLayout(new java.awt.BorderLayout());
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -159,13 +172,16 @@ public class GUI implements ISimDelegate {
 
                 jlRepStatPriemCasVRadeNaObsluhu.setText("");
                 jlRepStatPriemRadObsluhy.setText("");
-                jlRepStatPriemCasVSysteme.setText("");
+                jlRepStatPriemCasVSystemePrich.setText("");
+                jlRepStatPriemCasVSystemeOdch.setText("");
                 jlRepStatPriemObsadenostPracovnikov.setText("");
                 jlRepStatPriemRadTerminal1.setText("");
                 jlRepStatPriemRadTerminal2.setText("");
                 jlIntervalSpolahlivosti.setText("< , >");
                 jlRepStatPriemCasVRadeTerminal1.setText("");
                 jlRepStatPriemCasVRadeTerminal2.setText("");
+                jlAktualnaReplikacia.setText("0");
+                jlPocetReplikacii.setText(pocetReplikacii+"");
 
 //                for (int i = 16; i < 21; i++) {
 //                    for (int j = 5; j < 21; j++) {
@@ -175,9 +191,11 @@ public class GUI implements ISimDelegate {
 //                    }
 //                }
 
-                MySimulation pozicovna = new MySimulation();
-                pozicovna.registerDelegate(this);
-//                pozicovna.spust();
+                pozicovna.setPocetMinibusov(pocetMinibusov);
+                pozicovna.setPocetPracovnikov(pocetPracovnikov);
+                pozicovna.setPocetMiestMinibusu(12);
+                pozicovna.simulateAsync(pocetReplikacii, 5.5*60*60);
+                pozicovna.onReplicationDidFinish(this::refresh);
             } else {
                 JOptionPane.showMessageDialog(panel, "Nespravne parametre");
             }
@@ -192,26 +210,38 @@ public class GUI implements ISimDelegate {
                 jlVelkostRaduPozicovna.setText("");
                 jlVolnyPracovnici.setText("");
                 jlPocetZakVstup.setText("");
-                jlVybavenyZak.setText("");
-                jlStatPriemCasVSysteme.setText("");
+                jlVybavenyZakPrich.setText("");
+                jlVybavenyZakOdch.setText("");
+                jlStatPriemCasVSystemePrich.setText("");
+                jlStatPriemCasVSystemeOdch.setText("");
+                jlStatPriemRadTerminal1.setText("");
+                jlStatPriemRadTerminal2.setText("");
                 jlStatPriemRadObsluha.setText("");
                 jlStatPriemCasVRadeObsluha.setText("");
                 jlStatPriemObsadenostPrac.setText("");
                 jlStatPriemCasVRadeTerminal1.setText("");
                 jlStatPriemCasVRadeTerminal2.setText("");
 
-
                 tableModel = new DefaultTableModel(col, 0);
                 jtMinibusy.setModel(tableModel);
 
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < pocetMinibusov; i++) {
                     Object[] data = {"Minibus" + i, "", ""};
                     tableModel.addRow(data);
                 }
+
+                tableModel1 = new DefaultTableModel(col1, 0);
+                jtPracovnici.setModel(tableModel1);
+
+                for (int i = 0; i < pocetPracovnikov; i++) {
+                    Object[] data = {"Pracovnik" + i, ""};
+                    tableModel1.addRow(data);
+                }
+
                 try {
-                    df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    df = new SimpleDateFormat("HH:mm:ss");
                     cal = Calendar.getInstance();
-                    String myTime = "0000-00-00 00:00:00";
+                    String myTime = "00:00:00";
                     Date d = df.parse(myTime);
                     cal.setTime(d);
                     String newTime = df.format(cal.getTime());
@@ -220,17 +250,11 @@ public class GUI implements ISimDelegate {
                     e1.printStackTrace();
                 }
 
-
-                sliderRychlost.setValue(60);
-                sliderFrekvencia.setValue(1);
-
+                pozicovna.setPocetMinibusov(pocetMinibusov);
+                pozicovna.setPocetPracovnikov(pocetPracovnikov);
+                pozicovna.setPocetMiestMinibusu(12);
                 pozicovna.simulateAsync(1, 5.5*60*60);
-                pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue()/100));
-
                 pozicovna.onSimulationDidFinish(this::refresh);
-
-
-
             } else {
                 JOptionPane.showMessageDialog(panel, "Nespravne parametre");
             }
@@ -248,6 +272,17 @@ public class GUI implements ISimDelegate {
         });
         sliderRychlost.addChangeListener(e -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100));
         sliderFrekvencia.addChangeListener(e -> pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue() / 100));
+        pauzaButton.addActionListener(e -> {
+            if (!zastavenie){
+                zastavenie = true;
+                pozicovna.pauseSimulation();
+                pauzaButton.setText("pokracuj");
+            }else {
+                zastavenie = false;
+                pozicovna.resumeSimulation();
+                pauzaButton.setText("pauza");
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -255,22 +290,23 @@ public class GUI implements ISimDelegate {
         frame.setContentPane(new GUI().panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(1100, 500);
+        frame.setSize(1300, 500);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
 
     public void vypisVysledkyReplikacii(MySimulation pozicovna) {
-//        double priemCasVSysteme = pozicovna.repStatCasuVSysteme();
-//        jlRepStatPriemCasVSysteme.setText((Math.round(priemCasVSysteme * 10000d) / 10000d) + " min");
-//        jlRepStatPriemRadObsluhy.setText((Math.round(pozicovna.repStatZakVRadeNaObsluhu() * 10000d) / 10000d) + "");
-//        jlRepStatPriemCasVRadeNaObsluhu.setText((Math.round(pozicovna.repStatCasVRadeObsluha() * 10000d) / 10000d) + " min");
-//        jlRepStatPriemObsadenostPracovnikov.setText((Math.round(pozicovna.repStatObsadenostPrac() * 10000d) / 10000d) + "");
-//        jlRepStatPriemRadTerminal1.setText((Math.round(pozicovna.repStatZakVRadeTerminal1() * 10000d) / 10000d) + "");
-//        jlRepStatPriemRadTerminal2.setText((Math.round(pozicovna.repStatZakVRadeTerminal2() * 10000d) / 10000d) + "");
+        jlAktualnaReplikacia.setText(pozicovna.currentReplication() + 1 + "");
+        jlRepStatPriemCasVSystemePrich.setText((Math.round((pozicovna.getCasVSystemePrichZak().mean()/60) * 10000d) / 10000d) + " min");
+        jlRepStatPriemCasVSystemeOdch.setText(((Math.round(pozicovna.getCasVSystemeOdchZak().mean()/60) * 10000d) / 10000d) + " min");
+        jlRepStatPriemRadObsluhy.setText((Math.round(pozicovna.getVelkostRaduStatPozicovna().mean() * 10000d) / 10000d) + "");
+        jlRepStatPriemCasVRadeNaObsluhu.setText(((Math.round(pozicovna.getCasVRadePozicovna().mean()/60) * 10000d) / 10000d) + " min");
+        jlRepStatPriemObsadenostPracovnikov.setText((Math.round(pozicovna.getObsadenostPracovnikov().mean() * 10000d) / 10000d) + "");
+        jlRepStatPriemRadTerminal1.setText((Math.round(pozicovna.getVelkostRaduStatTerm1().mean() * 10000d) / 10000d) + "");
+        jlRepStatPriemRadTerminal2.setText((Math.round(pozicovna.getVelkostRaduStatTerm2().mean() * 10000d) / 10000d) + "");
 //        jlIntervalSpolahlivosti.setText(pozicovna.vypocitajInterval());
-//        jlRepStatPriemCasVRadeTerminal1.setText((Math.round(pozicovna.repStatCasVRadeTerminal1() * 10000d) / 10000d) + " min");
-//        jlRepStatPriemCasVRadeTerminal2.setText((Math.round(pozicovna.repStatCasVRadeTerminal2() * 10000d) / 10000d) + " min");
+        jlRepStatPriemCasVRadeTerminal1.setText((Math.round((pozicovna.getCasVRadeTerm1().mean()/60) * 10000d) / 10000d) + " min");
+        jlRepStatPriemCasVRadeTerminal2.setText((Math.round((pozicovna.getCasVRadeTerm2().mean()/60) * 10000d) / 10000d) + " min");
     }
 
 //    @Override
@@ -298,15 +334,17 @@ public class GUI implements ISimDelegate {
         jlVelkostRaduPozicovna.setText((Math.round(pozicovna.agentPozicovna().getRadZakPozicovna().lengthStatistic().mean() * 10000d) / 10000d) + "");
         jlVolnyPracovnici.setText(pozicovna.agentObsluhy().getPocetVolnychPracovnikov() + "");
         jlPocetZakVstup.setText(pozicovna.agentOkolia().getPocetZakaznikov() + "");
-        jlVybavenyZak.setText(pozicovna.agentModelu().getPocetObsluzenychZakaznikov() + "");
-        jlStatPriemCasVSysteme.setText((Math.round((pozicovna.agentModelu().getStatCasVSystemePrichZak().mean()/60)* 10000d) / 10000d) + " min");
-//        jlStatPriemRadObsluha.setText((Math.round(pozicovna.statZakVRadeObsluha() * 10000d) / 10000d) + "");
-//        jlStatPriemCasVRadeObsluha.setText((Math.round(pozicovna.statCasuVRadeObsluha() * 10000d) / 10000d) + " min");
+        jlVybavenyZakPrich.setText(pozicovna.agentModelu().getPocetObsluzZakPrich() + "");
+        jlVybavenyZakOdch.setText(pozicovna.agentModelu().getPocetObsluzZakOdch() + "");
+        jlStatPriemCasVSystemePrich.setText((Math.round((pozicovna.agentModelu().getStatCasVSystemePrichZak().mean()/60)* 10000d) / 10000d) + " min");
+        jlStatPriemCasVSystemeOdch.setText((Math.round((pozicovna.agentModelu().getStatCasVSystemeOdchZak().mean()/60)* 10000d) / 10000d) + " min");
         jlStatPriemObsadenostPrac.setText((Math.round(pozicovna.agentObsluhy().getVytazeniePracovnikov().mean() * 10000d) / 10000d) + "");
         jlStatPriemRadTerminal1.setText((Math.round(pozicovna.agentTerm1().getRadZakTerm1().lengthStatistic().mean() * 10000d) / 10000d) + "");
         jlStatPriemRadTerminal2.setText((Math.round(pozicovna.agentTerm2().getRadZakTerm2().lengthStatistic().mean() * 10000d) / 10000d) + "");
-//        jlStatPriemCasVRadeTerminal1.setText((Math.round(pozicovna.statCasuVRadeTerminal1() * 10000d) / 10000d) + " min");
-//        jlStatPriemCasVRadeTerminal2.setText((Math.round(pozicovna.statCasuVRadeTerminal2() * 10000d) / 10000d) + " min");
+        jlStatPriemRadObsluha.setText((Math.round(pozicovna.agentPozicovna().getRadZakPozicovna().lengthStatistic().mean() * 10000d) / 10000d) + "");
+        jlStatPriemCasVRadeTerminal1.setText((Math.round((pozicovna.agentTerm1().getStatCasVRade().mean()/60) * 10000d) / 10000d) + " min");
+        jlStatPriemCasVRadeTerminal2.setText((Math.round((pozicovna.agentTerm2().getStatCasVRade().mean()/60) * 10000d) / 10000d) + " min");
+        jlStatPriemCasVRadeObsluha.setText((Math.round((pozicovna.agentPozicovna().getStatCasVRade().mean()/60) * 10000d) / 10000d) + " min");
 
         LinkedList<Minibus> minibusy = pozicovna.agentMinibusov().getMinibusy();
 
@@ -318,6 +356,18 @@ public class GUI implements ISimDelegate {
                     tableModel.setValueAt(minibus.getPredoslaZastavka(), i, 1);
                     tableModel.setValueAt(minibus.getAktualnaZastavka(), i, 2);
                     tableModel.setValueAt(minibus.getCestujuci().size(), i, 3);
+                }
+            }
+        }
+
+        Pracovnik[] pracovnici = pozicovna.agentObsluhy().getPracovnici();
+
+        if (pracovnici != null){
+            Pracovnik pracovnik;
+            for (int i = 0; i < pracovnici.length; i++) {
+                pracovnik = pracovnici[i];
+                if (pracovnik != null){
+                    tableModel1.setValueAt(pracovnik.isObsadeny(), i, 1);
                 }
             }
         }
@@ -362,14 +412,12 @@ public class GUI implements ISimDelegate {
 
     @Override
     public void refresh(Simulation simulation) {
-        MySimulation pozicovna = (MySimulation) simulation;
+        MySimulation simulation1 = (MySimulation) simulation;
         JPanel activePanel = (JPanel) tabbedPane1.getSelectedComponent();
         if (activePanel == jpReplikacia) {
-//            pozicovna.setRychlost((double) sliderRychlost.getValue());
-//            pozicovna.setFrekvencia((double) sliderFrekvencia.getValue());
-            vypisVysledkyVCase(pozicovna);
+            vypisVysledkyVCase(simulation1);
         } else if (activePanel == jpReplikacie) {
-            vypisVysledkyReplikacii(pozicovna);
+            vypisVysledkyReplikacii(simulation1);
         } else if (activePanel == jpZavislostMinibusov) {
 //            vykresliGraf(pozicovna.getMinibusy(), pozicovna.repStatCasuVSysteme());
         } else if (activePanel == jpZavislostPracovnikov) {

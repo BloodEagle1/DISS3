@@ -41,7 +41,7 @@ public class ProcesPresunu extends Process
 				hold(dajCasHoldu(0.9),message);
 				minibus.setAktualnaZastavka("Terminal 1");
 				break;
-			case "Pozicovna": //TODO doriesit
+			case "Pozicovna":
 				if (minibus.isVystup()) {
 					message.setCode(Mc.presunHotovy);
 					hold(dajCasHoldu(0.0),message);

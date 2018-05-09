@@ -37,7 +37,7 @@ public class ProcesVystupuTerm3 extends Process
 			for (int i = 0; i < (zakaznik.getPocetCestujucich()); i++) {
 				casVystupu += genVystupu.sample();
 			}
-
+			((MyMessage) message).setZakaznik(zakaznik);
 		}
 		message.setCode(Mc.vystupTerm3Hotovy);
 		hold(casVystupu, message);

@@ -60,11 +60,12 @@ public class ManagerModelu extends Manager {
 	public void processOdchodZakaznika(MessageForm message)
 	{
 		Zakaznik zakaznik = ((MyMessage)message).getZakaznik();
-		myAgent().zvysPocetObsluzenychZakaznikov();
 		if (zakaznik.isPrichadzajuci()){
 			myAgent().pridajDoStatCasVSystemeZakPrich(mySim().currentTime() - zakaznik.getVstupDoSystemu());
+			myAgent().zvysPocetObsluzZakPrich();
 		} else {
 			myAgent().pridajDoStatCasVSystemeZakOdch(mySim().currentTime() - zakaznik.getVstupDoSystemu());
+			myAgent().zvysPocetObsluzZakOdch();
 		}
 	}
 

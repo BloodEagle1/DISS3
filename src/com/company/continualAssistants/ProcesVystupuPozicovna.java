@@ -38,6 +38,7 @@ public class ProcesVystupuPozicovna extends Process
 				casVystupu += genVystupu.sample();
 			}
 			myAgent().getRadZakPozicovna().enqueue(zakaznik);
+			((MyMessage) message).setZakaznik(zakaznik);
 
 		}
 		message.setCode(Mc.vystupPozicovnaHotovy);

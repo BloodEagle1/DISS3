@@ -2,12 +2,14 @@ package com.company.simulation;
 
 import OSPABA.*;
 import com.company.entity.Minibus;
+import com.company.entity.Pracovnik;
 import com.company.entity.Zakaznik;
 
 public class MyMessage extends MessageForm
 {
 	private Zakaznik zakaznik;
 	private Minibus minibus;
+	private Pracovnik pracovnik;
 	private int pocetVolnychPracovnikov;
 
 	public MyMessage(Simulation sim)
@@ -21,6 +23,7 @@ public class MyMessage extends MessageForm
 		// copy() is called in superclass
 		zakaznik = original.zakaznik;
 		minibus = original.minibus;
+		pracovnik = original.pracovnik;
 	}
 
 	@Override
@@ -51,6 +54,14 @@ public class MyMessage extends MessageForm
 
 	public Minibus getMinibus() {
 		return minibus;
+	}
+
+	public Pracovnik getPracovnik() {
+		return pracovnik;
+	}
+
+	public void setPracovnik(Pracovnik pracovnik) {
+		this.pracovnik = pracovnik;
 	}
 
 	public int getPocetVolnychPracovnikov() {

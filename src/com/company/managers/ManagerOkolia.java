@@ -38,7 +38,7 @@ public class ManagerOkolia extends Manager
 
 	//meta! sender="PlanovacPrichZakPozicovna", id="42", type="Finish"
 	public void processFinishPlanovacPrichZakPozicovna(MessageForm message) {
-		myAgent().zvysPocetZakaznikovVratenia();
+		myAgent().zvysPocetZakaznikov();
 
 		message.setAddressee(Id.agentModelu);
 		message.setCode(Mc.prichZakPozicovna);

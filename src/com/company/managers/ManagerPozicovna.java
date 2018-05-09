@@ -1,6 +1,7 @@
 package com.company.managers;
 
 import OSPABA.*;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 
@@ -28,10 +29,12 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="AgentPohybu", id="22", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
-		myAgent().getRadZakPozicovna().enqueue(((MyMessage)message).getZakaznik());
+		Zakaznik zakaznik = ((MyMessage)message).getZakaznik();
+		zakaznik.setVstupDoRaduPozicovna(mySim().currentTime());
+		myAgent().getRadZakPozicovna().enqueue(zakaznik);
 		message.setCode(Mc.pocetPracovnikovVolnych);
 		message.setAddressee(Id.agentObsluhy);
-		request(message.createCopy());
+		request(message);
 	}
 
 	//meta! sender="AgentObsluhy", id="24", type="Response"
@@ -82,6 +85,9 @@ public class ManagerPozicovna extends Manager
 	//meta! sender="ProcesVystupuPozicovna", id="58", type="Finish"
 	public void processFinishProcesVystupuPozicovna(MessageForm message)
 	{
+		Zakaznik zakaznik = ((MyMessage)message).getZakaznik();
+		if (zakaznik != null)
+			zakaznik.setVstupDoRaduPozicovna(mySim().currentTime());
 		message.setCode(Mc.pocetPracovnikovVolnych);
 		message.setAddressee(Id.agentObsluhy);
 		request(message.createCopy());
@@ -110,8 +116,10 @@ public class ManagerPozicovna extends Manager
 		if(!myAgent().getRadZakPozicovna().isEmpty() && ((MyMessage)message).getPocetVolnychPracovnikov() > 0 ){
 			message.setCode(Mc.obsluzZak);
 			message.setAddressee(Id.agentObsluhy);
-			((MyMessage)message).setZakaznik(myAgent().getRadZakPozicovna().dequeue());
-			request(message.createCopy());
+			Zakaznik zakaznik = myAgent().getRadZakPozicovna().dequeue();
+			myAgent().pridajDoStatCasVRade(mySim().currentTime() - zakaznik.getVstupDoRaduPozicovna());
+			((MyMessage)message).setZakaznik(zakaznik);
+			request(message);
 		}
 	}
 

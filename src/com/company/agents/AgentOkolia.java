@@ -26,7 +26,7 @@ public class AgentOkolia extends Agent
 		super.prepareReplication();
 		this.pocetZakaznikov = 0;
 		this.pocetZakaznikovVratenia = 0;
-		vypusteneMinibusy = 0;
+		this.vypusteneMinibusy = 0;
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -47,16 +47,8 @@ public class AgentOkolia extends Agent
 		return pocetZakaznikov;
 	}
 
-	public int getPocetZakaznikovVratenia() {
-		return pocetZakaznikovVratenia;
-	}
-
 	public void zvysPocetZakaznikov() {
 		pocetZakaznikov++;
-	}
-
-	public void zvysPocetZakaznikovVratenia() {
-		pocetZakaznikovVratenia++;
 	}
 
 	public int getVypusteneMinibusy() {

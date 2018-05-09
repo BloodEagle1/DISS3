@@ -18,6 +18,9 @@ public class Zakaznik extends Entity {
     private final double pocetCestujucich;
     private final double vstupDoSystemu;
     private boolean prichadzajuci;
+    private double vstupDoRaduTerm1;
+    private double vstupDoRaduTerm2;
+    private double vstupDoRaduPozicovna;
 
     public Zakaznik(Simulation mySim) {
         super(mySim);
@@ -44,5 +47,29 @@ public class Zakaznik extends Entity {
 
     public void setPrichadzajuci(boolean prichadzajuci) {
         this.prichadzajuci = prichadzajuci;
+    }
+
+    public double getVstupDoRaduTerm1() {
+        return vstupDoRaduTerm1;
+    }
+
+    public void setVstupDoRaduTerm1(double vstupDoRaduTerm1) {
+        this.vstupDoRaduTerm1 = vstupDoRaduTerm1;
+    }
+
+    public double getVstupDoRaduTerm2() {
+        return vstupDoRaduTerm2;
+    }
+
+    public void setVstupDoRaduTerm2(double vstupDoRaduTerm2) {
+        this.vstupDoRaduTerm2 = vstupDoRaduTerm2;
+    }
+
+    public double getVstupDoRaduPozicovna() {
+        return vstupDoRaduPozicovna;
+    }
+
+    public void setVstupDoRaduPozicovna(double vstupDoRaduPozicovna) {
+        this.vstupDoRaduPozicovna = vstupDoRaduPozicovna;
     }
 }

@@ -1,6 +1,7 @@
 package com.company.managers;
 
 import OSPABA.*;
+import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 
@@ -36,7 +37,9 @@ public class ManagerTerm1 extends Manager
 	//meta! sender="AgentPohybu", id="28", type="Notice"
 	public void processPrichZak(MessageForm message)
 	{
-		myAgent().getRadZakTerm1().enqueue(((MyMessage)message).getZakaznik());
+		Zakaznik zakaznik = ((MyMessage)message).getZakaznik();
+		zakaznik.setVstupDoRaduTerm1(mySim().currentTime());
+		myAgent().getRadZakTerm1().enqueue(zakaznik);
 	}
 
 	//meta! sender="ProcesNastupuTerm1", id="47", type="Finish"

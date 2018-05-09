@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.company.GUI">
-  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="4" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="6" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1032" height="484"/>
+      <xy x="20" y="20" width="1032" height="624"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -31,14 +31,14 @@
       </component>
       <tabbedpane id="d6b8" binding="tabbedPane1" default-binding="true">
         <constraints>
-          <grid row="1" column="0" row-span="3" col-span="7" vsize-policy="2" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="3" column="0" row-span="3" col-span="7" vsize-policy="2" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="afbd5" binding="jpReplikacia" layout-manager="GridLayoutManager" row-count="17" column-count="22" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="afbd5" binding="jpReplikacia" layout-manager="GridLayoutManager" row-count="22" column-count="22" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Replikacia"/>
@@ -59,46 +59,6 @@
                   <grid row="2" column="14" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <component id="55acb" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="velkost radu terminal2"/>
-                </properties>
-              </component>
-              <component id="e1007" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="velkost radu pozicovna"/>
-                </properties>
-              </component>
-              <component id="264fa" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="pocet volnych pracovnikov"/>
-                </properties>
-              </component>
-              <component id="3c1c0" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="pocet zakaznikov kt. vstupili do systemu"/>
-                </properties>
-              </component>
-              <component id="435b6" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="pocet vybavenych zakaznikov"/>
-                </properties>
-              </component>
               <component id="d3baf" class="javax.swing.JLabel" binding="jlVelkostRaduTerminal1">
                 <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -107,49 +67,9 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="24a2" class="javax.swing.JLabel" binding="jlVelkostRaduTerminal2">
-                <constraints>
-                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="4783c" class="javax.swing.JLabel" binding="jlVelkostRaduPozicovna">
-                <constraints>
-                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="8ed00" class="javax.swing.JLabel" binding="jlVolnyPracovnici">
-                <constraints>
-                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="3986a" class="javax.swing.JLabel" binding="jlPocetZakVstup">
-                <constraints>
-                  <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="16848" class="javax.swing.JLabel" binding="jlVybavenyZak">
-                <constraints>
-                  <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
               <component id="e6a63" class="javax.swing.JButton" binding="btnStartReplikacia">
                 <constraints>
-                  <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                  <grid row="21" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="20"/>
                   </grid>
                 </constraints>
@@ -162,34 +82,10 @@
                   <grid row="2" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="priem cas v systeme"/>
+                  <text value="priem cas v systeme prichod"/>
                 </properties>
               </component>
-              <component id="d5f60" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="3" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priem rad na obsluhu"/>
-                </properties>
-              </component>
-              <component id="39a8a" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="4" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priem cas v rade na obsluhu"/>
-                </properties>
-              </component>
-              <component id="74cd7" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="5" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priem obsadenost prac"/>
-                </properties>
-              </component>
-              <component id="2e4ea" class="javax.swing.JLabel" binding="jlStatPriemCasVSysteme">
+              <component id="2e4ea" class="javax.swing.JLabel" binding="jlStatPriemCasVSystemePrich">
                 <constraints>
                   <grid row="2" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -197,33 +93,11 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="205f2" class="javax.swing.JLabel" binding="jlStatPriemRadObsluha">
-                <constraints>
-                  <grid row="3" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="5f862" class="javax.swing.JLabel" binding="jlStatPriemCasVRadeObsluha">
-                <constraints>
-                  <grid row="4" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="24e2c" class="javax.swing.JLabel" binding="jlStatPriemObsadenostPrac">
-                <constraints>
-                  <grid row="5" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
               <scrollpane id="8a687">
                 <constraints>
-                  <grid row="1" column="21" row-span="16" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="21" row-span="8" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="500" height="100"/>
+                  </grid>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -304,23 +178,197 @@
                   <grid row="2" column="20" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
+              <component id="91a8e" class="javax.swing.JLabel" binding="jlCas">
+                <constraints>
+                  <grid row="0" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="00:00:00"/>
+                </properties>
+              </component>
+              <component id="b3fbf" class="javax.swing.JButton" binding="btnPauza">
+                <constraints>
+                  <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="80" height="20"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Pauza"/>
+                </properties>
+              </component>
+              <component id="85b93" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priem cas v systeme odchod"/>
+                </properties>
+              </component>
+              <component id="cbce" class="javax.swing.JLabel" binding="jlStatPriemCasVSystemeOdch">
+                <constraints>
+                  <grid row="3" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="55acb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="velkost radu terminal2"/>
+                </properties>
+              </component>
+              <component id="24a2" class="javax.swing.JLabel" binding="jlVelkostRaduTerminal2">
+                <constraints>
+                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="e1007" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="velkost radu pozicovna"/>
+                </properties>
+              </component>
+              <component id="264fa" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="pocet volnych pracovnikov"/>
+                </properties>
+              </component>
+              <component id="3c1c0" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="pocet zakaznikov kt. vstupili do systemu"/>
+                </properties>
+              </component>
+              <component id="435b6" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="pocet vybavenych zakaznikov prichod"/>
+                </properties>
+              </component>
+              <component id="6620" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="pocet vybavenych zakaznikov odchod"/>
+                </properties>
+              </component>
+              <component id="4783c" class="javax.swing.JLabel" binding="jlVelkostRaduPozicovna">
+                <constraints>
+                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="8ed00" class="javax.swing.JLabel" binding="jlVolnyPracovnici">
+                <constraints>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="3986a" class="javax.swing.JLabel" binding="jlPocetZakVstup">
+                <constraints>
+                  <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="16848" class="javax.swing.JLabel" binding="jlVybavenyZakPrich">
+                <constraints>
+                  <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="ca0f2" class="javax.swing.JLabel" binding="jlVybavenyZakOdch">
+                <constraints>
+                  <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="74cd7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priem obsadenost prac"/>
+                </properties>
+              </component>
+              <component id="24e2c" class="javax.swing.JLabel" binding="jlStatPriemObsadenostPrac">
+                <constraints>
+                  <grid row="4" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <scrollpane id="db197">
+                <constraints>
+                  <grid row="9" column="21" row-span="11" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="500" height="100"/>
+                  </grid>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="acc3d" class="javax.swing.JTable" binding="jtPracovnici">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <vspacer id="9b960">
+                <constraints>
+                  <grid row="20" column="21" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
               <component id="1dfc8" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="6" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priem rad terminal1"/>
                 </properties>
               </component>
+              <component id="f768" class="javax.swing.JLabel" binding="jlStatPriemRadTerminal1">
+                <constraints>
+                  <grid row="5" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
               <component id="8588c" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="7" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priem rad terminal2"/>
                 </properties>
               </component>
-              <component id="f768" class="javax.swing.JLabel" binding="jlStatPriemRadTerminal1">
+              <component id="4448e" class="javax.swing.JLabel" binding="jlStatPriemRadTerminal2">
                 <constraints>
                   <grid row="6" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -328,7 +376,15 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="4448e" class="javax.swing.JLabel" binding="jlStatPriemRadTerminal2">
+              <component id="d5f60" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="7" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priem rad na obsluhu"/>
+                </properties>
+              </component>
+              <component id="205f2" class="javax.swing.JLabel" binding="jlStatPriemRadObsluha">
                 <constraints>
                   <grid row="7" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -336,35 +392,12 @@
                   <text value=""/>
                 </properties>
               </component>
-              <vspacer id="c50eb">
-                <constraints>
-                  <grid row="12" column="4" row-span="4" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
-              <vspacer id="324eb">
-                <constraints>
-                  <grid row="10" column="10" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
-              <vspacer id="5450d">
-                <constraints>
-                  <grid row="13" column="10" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
               <component id="b5818" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="8" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priem cas v rade terminal1"/>
-                </properties>
-              </component>
-              <component id="782ff" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="9" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priem cas v rade terminal2"/>
                 </properties>
               </component>
               <component id="a93f1" class="javax.swing.JLabel" binding="jlStatPriemCasVRadeTerminal1">
@@ -375,6 +408,14 @@
                   <text value=""/>
                 </properties>
               </component>
+              <component id="782ff" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="9" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priem cas v rade terminal2"/>
+                </properties>
+              </component>
               <component id="173ae" class="javax.swing.JLabel" binding="jlStatPriemCasVRadeTerminal2">
                 <constraints>
                   <grid row="9" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -383,61 +424,25 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="91a8e" class="javax.swing.JLabel" binding="jlCas">
+              <component id="39a8a" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="10" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="0000-00-00 00:00:00"/>
+                  <text value="priem cas v rade na obsluhu"/>
                 </properties>
               </component>
-              <component id="b3fbf" class="javax.swing.JButton" binding="btnPauza">
+              <component id="5f862" class="javax.swing.JLabel" binding="jlStatPriemCasVRadeObsluha">
                 <constraints>
-                  <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                    <preferred-size width="80" height="20"/>
-                  </grid>
+                  <grid row="10" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Pauza"/>
-                </properties>
-              </component>
-              <component id="d5808" class="javax.swing.JSlider" binding="sliderRychlost">
-                <constraints>
-                  <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <maximum value="60"/>
-                  <minimum value="1"/>
-                </properties>
-              </component>
-              <component id="65f24" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Rychlost"/>
-                </properties>
-              </component>
-              <component id="562b0" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Frekvencia planovania"/>
-                </properties>
-              </component>
-              <component id="ed738" class="javax.swing.JSlider" binding="sliderFrekvencia">
-                <constraints>
-                  <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <maximum value="100"/>
-                  <minimum value="1"/>
+                  <text value=""/>
                 </properties>
               </component>
             </children>
           </grid>
-          <grid id="9b043" binding="jpReplikacie" layout-manager="GridLayoutManager" row-count="10" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="9b043" binding="jpReplikacie" layout-manager="GridLayoutManager" row-count="13" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Replikacie"/>
@@ -447,52 +452,20 @@
             <children>
               <component id="90a2d" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="priemerny cas v systeme"/>
+                  <text value="priemerny cas v systeme prichod"/>
                 </properties>
               </component>
               <vspacer id="e409e">
                 <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="11" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="d3343" class="javax.swing.JLabel" binding="jlRepStatPriemCasVSysteme">
+              <component id="d3343" class="javax.swing.JLabel" binding="jlRepStatPriemCasVSystemePrich">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="c83ee" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priemerny rad na obsluhu"/>
-                </properties>
-              </component>
-              <component id="48c9f" class="javax.swing.JLabel" binding="jlRepStatPriemRadObsluhy">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="1a0da" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="priemerny cas v rade na obsluhu"/>
-                </properties>
-              </component>
-              <component id="7c4b1" class="javax.swing.JLabel" binding="jlRepStatPriemCasVRadeNaObsluhu">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -500,7 +473,7 @@
               </component>
               <component id="f00c7" class="javax.swing.JButton" binding="btnStart">
                 <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="20"/>
                   </grid>
                 </constraints>
@@ -510,7 +483,7 @@
               </component>
               <component id="12e03" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priemerna obsadenost pracovnikov"/>
@@ -518,7 +491,7 @@
               </component>
               <component id="1a91d" class="javax.swing.JLabel" binding="jlRepStatPriemObsadenostPracovnikov">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -526,12 +499,12 @@
               </component>
               <hspacer id="e9fe6">
                 <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
               <component id="8efdd" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priemerny rad terminal1"/>
@@ -539,7 +512,7 @@
               </component>
               <component id="e9bf0" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priemerny rad termianl2"/>
@@ -547,7 +520,7 @@
               </component>
               <component id="fec6a" class="javax.swing.JLabel" binding="jlRepStatPriemRadTerminal1">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -555,7 +528,7 @@
               </component>
               <component id="fa17" class="javax.swing.JLabel" binding="jlRepStatPriemRadTerminal2">
                 <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -563,7 +536,7 @@
               </component>
               <component id="6d12" class="javax.swing.JLabel" binding="jlIntervalSpolahlivosti">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="&lt; , &gt;"/>
@@ -571,7 +544,7 @@
               </component>
               <component id="eebc0" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priemerny cas v rade terminal1"/>
@@ -579,7 +552,7 @@
               </component>
               <component id="de268" class="javax.swing.JLabel" binding="jlRepStatPriemCasVRadeTerminal1">
                 <constraints>
-                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -587,7 +560,7 @@
               </component>
               <component id="e7393" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="priemerny cas v rade terminal2"/>
@@ -595,10 +568,103 @@
               </component>
               <component id="615b4" class="javax.swing.JLabel" binding="jlRepStatPriemCasVRadeTerminal2">
                 <constraints>
-                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="3d19b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priemerny cas v systeme odchod"/>
+                </properties>
+              </component>
+              <component id="59314" class="javax.swing.JLabel" binding="jlRepStatPriemCasVSystemeOdch">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c83ee" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priemerny rad na obsluhu"/>
+                </properties>
+              </component>
+              <component id="48c9f" class="javax.swing.JLabel" binding="jlRepStatPriemRadObsluhy">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="1a0da" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="priemerny cas v rade na obsluhu"/>
+                </properties>
+              </component>
+              <component id="7c4b1" class="javax.swing.JLabel" binding="jlRepStatPriemCasVRadeNaObsluhu">
+                <constraints>
+                  <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="2b309" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="replikacie"/>
+                </properties>
+              </component>
+              <component id="e8b47" class="javax.swing.JLabel" binding="jlAktualnaReplikacia">
+                <constraints>
+                  <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <hspacer id="61d94">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="6" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="1f617" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="/"/>
+                </properties>
+              </component>
+              <component id="cbf67" class="javax.swing.JLabel" binding="jlPocetReplikacii">
+                <constraints>
+                  <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="1d6e4" class="javax.swing.JButton" binding="pauzaButton" default-binding="true">
+                <constraints>
+                  <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Pauza"/>
                 </properties>
               </component>
             </children>
@@ -684,6 +750,49 @@
         </constraints>
         <properties>
           <text value="100"/>
+        </properties>
+      </component>
+      <hspacer id="aa6d3">
+        <constraints>
+          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="65f24" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Rychlost"/>
+        </properties>
+      </component>
+      <component id="562b0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Frekvencia planovania"/>
+        </properties>
+      </component>
+      <component id="ed738" class="javax.swing.JSlider" binding="sliderFrekvencia">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <maximum value="10000"/>
+          <minimum value="1"/>
+        </properties>
+      </component>
+      <component id="d5808" class="javax.swing.JSlider" binding="sliderRychlost">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <maximum value="60"/>
+          <minimum value="1"/>
         </properties>
       </component>
     </children>

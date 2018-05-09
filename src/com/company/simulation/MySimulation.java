@@ -7,32 +7,19 @@ import com.company.agents.*;
 
 public class MySimulation extends Simulation
 {
-	private int pocetReplikacii = 100;
-	private int pocetMiestMinibusu = 12;
-	private int pocetPracovnikov = 7;
-	private int pocetMinibusov = 2;
+	private int pocetMiestMinibusu;
+	private int pocetPracovnikov;
+	private int pocetMinibusov;
 
 	private Stat velkostRaduStatTerm1;
 	private Stat velkostRaduStatTerm2;
 	private Stat velkostRaduStatPozicovna;
 	private Stat casVSystemePrichZak;
 	private Stat casVSystemeOdchZak;
-
-	public int getPocetReplikacii() {
-		return pocetReplikacii;
-	}
-
-	public int getPocetMiestMinibusu() {
-		return pocetMiestMinibusu;
-	}
-
-	public int getPocetPracovnikov() {
-		return pocetPracovnikov;
-	}
-
-	public int getPocetMinibusov() {
-		return pocetMinibusov;
-	}
+	private Stat casVRadeTerm1;
+	private Stat casVRadeTerm2;
+	private Stat casVRadePozicovna;
+	private Stat obsadenostPracovnikov;
 
 	public MySimulation()
 	{
@@ -49,6 +36,10 @@ public class MySimulation extends Simulation
 		velkostRaduStatPozicovna = new Stat();
 		casVSystemePrichZak = new Stat();
 		casVSystemeOdchZak = new Stat();
+		casVRadeTerm1 = new Stat();
+		casVRadeTerm2 = new Stat();
+		casVRadePozicovna = new Stat();
+		obsadenostPracovnikov = new Stat();
 	}
 
 	@Override
@@ -56,9 +47,7 @@ public class MySimulation extends Simulation
 	{
 		super.prepareReplication();
 		// Reset entities, queues, local statistics, etc...
-
 		agentModelu().spustiSimulaciu();
-
 	}
 
 	@Override
@@ -73,7 +62,11 @@ public class MySimulation extends Simulation
 		WStat radStat2 = agentPozicovna().getRadZakPozicovna().lengthStatistic();
 		velkostRaduStatPozicovna.addSample(radStat2.mean());
 		casVSystemePrichZak.addSample(agentModelu().getStatCasVSystemePrichZak().mean());
-		casVSystemePrichZak.addSample(agentModelu().getStatCasVSystemeOdchZak().mean());
+		casVSystemeOdchZak.addSample(agentModelu().getStatCasVSystemeOdchZak().mean());
+		casVRadeTerm1.addSample(agentTerm1().getStatCasVRade().mean());
+		casVRadeTerm2.addSample(agentTerm2().getStatCasVRade().mean());
+		casVRadePozicovna.addSample(agentPozicovna().getStatCasVRade().mean());
+		obsadenostPracovnikov.addSample(agentObsluhy().getVytazeniePracovnikov().mean());
 	}
 
 	@Override
@@ -81,11 +74,6 @@ public class MySimulation extends Simulation
 	{
 		// Dysplay simulation results
 		super.simulationFinished();
-//		System.out.println(currentTime());
-//		System.out.println("Velkost radu terminal1: " + velkostRaduStatTerm1.mean());
-//		System.out.println("Velkost radu terminal2: " + velkostRaduStatTerm2.mean());
-//		System.out.println("Velkost radu pozicovna: " + velkostRaduStatPozicovna.mean());
-//		System.out.println(velkostRaduStatPozicovna.sampleSize());
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -174,4 +162,64 @@ public AgentOkolia agentOkolia()
 	public void setAgentOkolia(AgentOkolia agentOkolia)
 	{_agentOkolia = agentOkolia; }
 	//meta! tag="end"
+
+	public int getPocetMiestMinibusu() {
+		return pocetMiestMinibusu;
+	}
+
+	public int getPocetPracovnikov() {
+		return pocetPracovnikov;
+	}
+
+	public int getPocetMinibusov() {
+		return pocetMinibusov;
+	}
+
+	public void setPocetMiestMinibusu(int pocetMiestMinibusu) {
+		this.pocetMiestMinibusu = pocetMiestMinibusu;
+	}
+
+	public void setPocetPracovnikov(int pocetPracovnikov) {
+		this.pocetPracovnikov = pocetPracovnikov;
+	}
+
+	public void setPocetMinibusov(int pocetMinibusov) {
+		this.pocetMinibusov = pocetMinibusov;
+	}
+
+	public Stat getVelkostRaduStatTerm1() {
+		return velkostRaduStatTerm1;
+	}
+
+	public Stat getVelkostRaduStatTerm2() {
+		return velkostRaduStatTerm2;
+	}
+
+	public Stat getVelkostRaduStatPozicovna() {
+		return velkostRaduStatPozicovna;
+	}
+
+	public Stat getCasVSystemePrichZak() {
+		return casVSystemePrichZak;
+	}
+
+	public Stat getCasVSystemeOdchZak() {
+		return casVSystemeOdchZak;
+	}
+
+	public Stat getCasVRadeTerm1() {
+		return casVRadeTerm1;
+	}
+
+	public Stat getCasVRadeTerm2() {
+		return casVRadeTerm2;
+	}
+
+	public Stat getCasVRadePozicovna() {
+		return casVRadePozicovna;
+	}
+
+	public Stat getObsadenostPracovnikov() {
+		return obsadenostPracovnikov;
+	}
 }

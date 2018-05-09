@@ -10,7 +10,8 @@ public class AgentModelu extends Agent
 {
 	private Stat statCasVSystemePrichZak;
 	private Stat statCasVSystemeOdchZak;
-	private int pocetObsluzenychZakaznikov;
+	private int pocetObsluzZakPrich;
+	private int pocetObsluzZakOdch;
 
 	public AgentModelu(int id, Simulation mySim, Agent parent)
 	{
@@ -25,6 +26,8 @@ public class AgentModelu extends Agent
 		// Setup component for the next replication
 		this.statCasVSystemePrichZak = new Stat();
 		this.statCasVSystemeOdchZak = new Stat();
+		this.pocetObsluzZakPrich = 0;
+		this.pocetObsluzZakOdch = 0;
 		MyMessage msg = new MyMessage(mySim());
 		msg.setAddressee(this);
 		msg.setCode(Mc.init);
@@ -59,12 +62,20 @@ public class AgentModelu extends Agent
 		return statCasVSystemeOdchZak;
 	}
 
-	public int getPocetObsluzenychZakaznikov() {
-		return pocetObsluzenychZakaznikov;
+	public int getPocetObsluzZakPrich() {
+		return pocetObsluzZakPrich;
 	}
 
-	public void zvysPocetObsluzenychZakaznikov(){
-		pocetObsluzenychZakaznikov++;
+	public int getPocetObsluzZakOdch() {
+		return pocetObsluzZakOdch;
+	}
+
+	public void zvysPocetObsluzZakPrich(){
+		pocetObsluzZakPrich++;
+	}
+
+	public void zvysPocetObsluzZakOdch(){
+		pocetObsluzZakOdch++;
 	}
 
 	public void pridajDoStatCasVSystemeZakPrich(double cas){

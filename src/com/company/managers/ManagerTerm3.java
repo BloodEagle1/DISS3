@@ -36,6 +36,10 @@ public class ManagerTerm3 extends Manager
 	//meta! sender="ProcesVystupuTerm3", id="53", type="Finish"
 	public void processFinish(MessageForm message)
 	{
+		message.setCode(Mc.odchodZakaznika);
+		message.setAddressee(Id.agentPohybu);
+		notice(message.createCopy());
+
 		if (!((MyMessage)message).getMinibus().getCestujuci().isEmpty()){
 			message.setCode(Mc.start);
 			message.setAddressee(Id.procesVystupuTerm3);

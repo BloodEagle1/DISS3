@@ -2,6 +2,7 @@ package com.company.agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.Stat;
 import OSPStat.WStat;
 import com.company.entity.Zakaznik;
 import com.company.simulation.*;
@@ -14,6 +15,7 @@ public class AgentPozicovna extends Agent
 
 	private SimQueue<Zakaznik> radZakPozicovna;
 	private SimQueue<Zakaznik> radZakNaOdvoz;
+	private Stat statCasVRade;
 
 	public AgentPozicovna(int id, Simulation mySim, Agent parent)
 	{
@@ -28,6 +30,7 @@ public class AgentPozicovna extends Agent
 		// Setup component for the next replication
 		this.radZakPozicovna = new SimQueue<>(new WStat(mySim()));
 		this.radZakNaOdvoz = new SimQueue<>(new WStat(mySim()));
+		this.statCasVRade = new Stat();
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -53,5 +56,13 @@ public class AgentPozicovna extends Agent
 
 	public SimQueue<Zakaznik> getRadZakNaOdvoz() {
 		return radZakNaOdvoz;
+	}
+
+	public void pridajDoStatCasVRade(double cas){
+		statCasVRade.addSample(cas);
+	}
+
+	public Stat getStatCasVRade() {
+		return statCasVRade;
 	}
 }

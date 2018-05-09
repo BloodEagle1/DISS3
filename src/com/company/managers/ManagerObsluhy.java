@@ -1,6 +1,7 @@
 package com.company.managers;
 
 import OSPABA.*;
+import com.company.entity.Pracovnik;
 import com.company.simulation.*;
 import com.company.agents.*;
 
@@ -28,7 +29,10 @@ public class ManagerObsluhy extends Manager
 	//meta! sender="AgentPozicovna", id="24", type="Request"
 	public void processObsluzZak(MessageForm message)
 	{
+		Pracovnik pracovnik = myAgent().dajVolnehoPracovnika();
+		pracovnik.setObsadeny(true);
 		myAgent().znizPocetVolnychPracovnikov();
+		((MyMessage)message).setPracovnik(pracovnik);
 		message.setCode(Mc.start);
 		message.setAddressee(Id.procesObsluhy);
 		startContinualAssistant(message);
@@ -37,7 +41,10 @@ public class ManagerObsluhy extends Manager
 	//meta! sender="ProcesObsluhy", id="61", type="Finish"
 	public void processFinish(MessageForm message)
 	{
+		Pracovnik pracovnik = ((MyMessage)message).getPracovnik();
+		pracovnik.setObsadeny(false);
 		myAgent().zvysPocetVolnychPracovnikov();
+		((MyMessage) message).setPracovnik(null);
 		message.setCode(Mc.obsluzZak);
 		response(message);
 	}

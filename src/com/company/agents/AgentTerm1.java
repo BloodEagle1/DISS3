@@ -2,6 +2,7 @@ package com.company.agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.Stat;
 import OSPStat.WStat;
 import com.company.entity.Zakaznik;
 import com.company.simulation.*;
@@ -13,6 +14,7 @@ public class AgentTerm1 extends Agent
 {
 
 	private SimQueue<Zakaznik> radZakTerm1;
+	private Stat statCasVRade;
 
 	public AgentTerm1(int id, Simulation mySim, Agent parent)
 	{
@@ -26,6 +28,7 @@ public class AgentTerm1 extends Agent
 		super.prepareReplication();
 		// Setup component for the next replication
 		this.radZakTerm1 = new SimQueue<>(new WStat(mySim()));
+		this.statCasVRade = new Stat();
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -42,5 +45,13 @@ public class AgentTerm1 extends Agent
 
 	public SimQueue<Zakaznik> getRadZakTerm1() {
 		return radZakTerm1;
+	}
+
+	public void pridajDoStatCasVRade(double cas){
+		statCasVRade.addSample(cas);
+	}
+
+	public Stat getStatCasVRade() {
+		return statCasVRade;
 	}
 }
