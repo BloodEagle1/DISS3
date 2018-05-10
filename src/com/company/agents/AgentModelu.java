@@ -79,10 +79,12 @@ public class AgentModelu extends Agent
 	}
 
 	public void pridajDoStatCasVSystemeZakPrich(double cas){
-		statCasVSystemePrichZak.addSample(cas);
+		if (mySim().currentTime() >= 60*60)
+			statCasVSystemePrichZak.addSample(cas);
 	}
 
 	public void pridajDoStatCasVSystemeZakOdch(double cas){
-		statCasVSystemeOdchZak.addSample(cas);
+		if (mySim().currentTime() >= 60*60)
+			statCasVSystemeOdchZak.addSample(cas);
 	}
 }

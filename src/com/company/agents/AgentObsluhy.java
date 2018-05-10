@@ -62,12 +62,14 @@ public class AgentObsluhy extends Agent
 	}
 
 	public void zvysPocetVolnychPracovnikov(){
-		vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
+		if (mySim().currentTime() >= 60*60)
+			vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
 		pocetVolnychPracovnikov++;
 	}
 
 	public void znizPocetVolnychPracovnikov(){
-		vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
+		if (mySim().currentTime() >= 60*60)
+			vytazeniePracovnikov.addSample(pocetPracovnikov - pocetVolnychPracovnikov);
 		pocetVolnychPracovnikov--;
 	}
 

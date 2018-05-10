@@ -59,7 +59,8 @@ public class AgentPozicovna extends Agent
 	}
 
 	public void pridajDoStatCasVRade(double cas){
-		statCasVRade.addSample(cas);
+		if (mySim().currentTime() >= 60*60)
+			statCasVRade.addSample(cas);
 	}
 
 	public Stat getStatCasVRade() {
