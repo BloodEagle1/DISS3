@@ -29,16 +29,19 @@ public class ProcesPresunu extends Process
 			case "Terminal 1":
 				message.setCode(Mc.presunHotovy);
 				hold(dajCasHoldu(0.5), message);
+				minibus.zvysPrejdeneKilometre(0.5);
 				minibus.setAktualnaZastavka("Terminal 2");
 				break;
 			case "Terminal 2":
 				message.setCode(Mc.presunHotovy);
 				hold(dajCasHoldu(3.4), message);
+				minibus.zvysPrejdeneKilometre(3.4);
 				minibus.setAktualnaZastavka("Pozicovna");
 				break;
 			case "Terminal 3":
 				message.setCode(Mc.presunHotovy);
 				hold(dajCasHoldu(0.9),message);
+				minibus.zvysPrejdeneKilometre(0.9);
 				minibus.setAktualnaZastavka("Terminal 1");
 				break;
 			case "Pozicovna":
@@ -50,11 +53,13 @@ public class ProcesPresunu extends Process
 					if (!minibus.getCestujuci().isEmpty()){
 						message.setCode(Mc.presunHotovy);
 						hold(dajCasHoldu(2.9), message);
+						minibus.zvysPrejdeneKilometre(2.9);
 						minibus.setVystup(true);
 						minibus.setAktualnaZastavka("Terminal 3");
 					}else{
 						message.setCode(Mc.presunHotovy);
 						hold(dajCasHoldu(2.5), message);
+						minibus.zvysPrejdeneKilometre(2.5);
 						minibus.setVystup(true);
 						minibus.setAktualnaZastavka("Terminal 1");
 					}

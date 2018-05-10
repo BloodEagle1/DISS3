@@ -90,7 +90,7 @@ public class GUI implements ISimDelegate {
         this.spodna2 = Double.MAX_VALUE;
         this.horna1 = Double.MIN_VALUE;
         this.horna2 = Double.MIN_VALUE;
-        String col[] = {"Minibus", "Predosla zastavka", "Aktualna zastavka", "Pocet cestujucich"};
+        String col[] = {"Minibus", "Predosla zastavka", "Aktualna zastavka", "Pocet cestujucich", "Prejdene kilometre"};
         tableModel = new DefaultTableModel(col, 0);
         jtMinibusy.setModel(tableModel);
         String col1[] = {"Pracovnik", "Obsadenost"};
@@ -226,7 +226,7 @@ public class GUI implements ISimDelegate {
                 jtMinibusy.setModel(tableModel);
 
                 for (int i = 0; i < pocetMinibusov; i++) {
-                    Object[] data = {"Minibus" + i, "", ""};
+                    Object[] data = {"Minibus" + i, "", "", "", ""};
                     tableModel.addRow(data);
                 }
 
@@ -356,6 +356,7 @@ public class GUI implements ISimDelegate {
                     tableModel.setValueAt(minibus.getPredoslaZastavka(), i, 1);
                     tableModel.setValueAt(minibus.getAktualnaZastavka(), i, 2);
                     tableModel.setValueAt(minibus.getCestujuci().size(), i, 3);
+					tableModel.setValueAt(minibus.getPrejdeneKilometre(), i, 4);
                 }
             }
         }

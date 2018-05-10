@@ -14,6 +14,7 @@ public class Minibus extends Entity {
     private String aktualnaZastavka;
     private int pocetVolnychMiest;
     private boolean vystup;
+    private double prejdeneKilometre;
 
     public Minibus(Simulation mySim) {
         super(mySim);
@@ -22,6 +23,7 @@ public class Minibus extends Entity {
         this.pocetVolnychMiest = pocetMiest;
         this.vystup = true;
         this.predoslaZastavka = "dafa";
+        this.prejdeneKilometre = 0.0;
     }
 
     public SimQueue<Zakaznik> getCestujuci() {
@@ -66,5 +68,13 @@ public class Minibus extends Entity {
 
     public void setVystup(boolean vystup) {
         this.vystup = vystup;
+    }
+
+    public double getPrejdeneKilometre() {
+        return prejdeneKilometre;
+    }
+
+    public void zvysPrejdeneKilometre(double km){
+        prejdeneKilometre +=km;
     }
 }
