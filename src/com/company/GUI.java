@@ -241,7 +241,7 @@ public class GUI implements ISimDelegate {
                 try {
                     df = new SimpleDateFormat("HH:mm:ss");
                     cal = Calendar.getInstance();
-                    String myTime = "00:00:00";
+                    String myTime = "16:00:00";
                     Date d = df.parse(myTime);
                     cal.setTime(d);
                     String newTime = df.format(cal.getTime());
@@ -331,7 +331,7 @@ public class GUI implements ISimDelegate {
 
         jlVelkostRaduTerminal1.setText((Math.round(pozicovna.agentTerm1().getRadZakTerm1().size() * 10000d) / 10000d) + "");
         jlVelkostRaduTerminal2.setText((Math.round(pozicovna.agentTerm2().getRadZakTerm2().size() * 10000d) / 10000d) + "");
-        jlVelkostRaduPozicovna.setText((Math.round(pozicovna.agentPozicovna().getRadZakPozicovna().lengthStatistic().mean() * 10000d) / 10000d) + "");
+        jlVelkostRaduPozicovna.setText((Math.round(pozicovna.agentPozicovna().getRadZakPozicovna().size() * 10000d) / 10000d) + "");
         jlVolnyPracovnici.setText(pozicovna.agentObsluhy().getPocetVolnychPracovnikov() + "");
         jlPocetZakVstup.setText(pozicovna.agentOkolia().getPocetZakaznikov() + "");
         jlVybavenyZakPrich.setText(pozicovna.agentModelu().getPocetObsluzZakPrich() + "");
@@ -373,7 +373,7 @@ public class GUI implements ISimDelegate {
         }
 
         cal.set(0,0,0,0,0,0);
-        cal.add(Calendar.SECOND, (int)(pozicovna.currentTime()));
+        cal.add(Calendar.SECOND, (int)(pozicovna.currentTime()) + 15*60*60);
         String newTime = df.format(cal.getTime());
         jlCas.setText(newTime);
         pozicovna.setSimSpeed(sliderFrekvencia.getValue(), (double)sliderRychlost.getValue()/100);

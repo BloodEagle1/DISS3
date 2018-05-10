@@ -780,7 +780,7 @@
           </grid>
         </constraints>
         <properties>
-          <maximum value="10000"/>
+          <maximum value="1000"/>
           <minimum value="1"/>
         </properties>
       </component>
