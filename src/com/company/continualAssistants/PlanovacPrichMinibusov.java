@@ -23,8 +23,11 @@ public class PlanovacPrichMinibusov extends Scheduler
 	//meta! sender="AgentOkolia", id="44", type="Start"
 	public void processStart(MessageForm message)
 	{
-		message.setCode(Mc.novyAutobus);
-		hold(15*60, message);
+		myAgent().zvysVypusteneMinibusy();
+		if (myAgent().getVypusteneMinibusy() <= ((MySimulation) mySim()).getPocetMinibusov()) {
+			message.setCode(Mc.novyAutobus);
+			hold((15*60)*myAgent().getVypusteneMinibusy(), message);
+		}
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -39,10 +42,10 @@ public class PlanovacPrichMinibusov extends Scheduler
 	public void processNovyAutobus(MessageForm message)
 	{
 		Minibus minibus = new Minibus(mySim());
-		myAgent().zvysVypusteneMinibusy();
-		if (myAgent().getVypusteneMinibusy() < ((MySimulation) mySim()).getPocetMinibusov() -1){
+		if (myAgent().getVypusteneMinibusy() < ((MySimulation) mySim()).getPocetMinibusov()){
+			myAgent().zvysVypusteneMinibusy();
 			MyMessage msg = new MyMessage((MyMessage) message);
-			hold(15*60, msg);
+			hold((15*60)*myAgent().getVypusteneMinibusy(), msg);
 		}
 
 		((MyMessage)message).setMinibus(minibus);
