@@ -239,11 +239,25 @@ public class GUI implements ISimDelegate {
                 jlIntervalSpolahlivostiCasVRadTerm2.setText("< , >");
                 jlIntervalSpolahlivostiCasVRadPozic.setText("< , >");
 
-//                for (int i = 16; i < 21; i++) {
-//                    for (int j = 5; j < 21; j++) {
-//                        Pozicovna pozicovna = new Pozicovna((double) pocetReplikacii * 31 * 24 * 60 * 60, i, j);
-//                        pozicovna.registrujDelegata(this);
-//                        pozicovna.spust();
+//                for (int i = 2; i < 21; i++) {
+//                    for (int j = 2; j < 21; j++) {
+//                        for (int k = 0; k < 3; k++) {
+//                            if (k == 0)
+//                            {
+//                                pocetMiest = 12;
+//                            }else if (k == 1){
+//                                pocetMiest = 18;
+//                            }else {
+//                                pocetMiest = 30;
+//                            }
+//
+//                            pozicovna = new MySimulation();
+//                            pozicovna.setPocetMinibusov(i);
+//                            pozicovna.setPocetPracovnikov(j);
+//                            pozicovna.setPocetMiestMinibusu(pocetMiest);
+//                            pozicovna.setSimSpeed(0,0);
+//                            pozicovna.simulate(10, 5.5*60*60);
+//                        }
 //                    }
 //                }
 

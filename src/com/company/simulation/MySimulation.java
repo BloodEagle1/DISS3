@@ -4,6 +4,9 @@ import OSPABA.*;
 import OSPStat.Stat;
 import OSPStat.WStat;
 import com.company.agents.*;
+import com.company.entity.Minibus;
+
+import java.util.LinkedList;
 
 public class MySimulation extends Simulation
 {
@@ -74,6 +77,27 @@ public class MySimulation extends Simulation
 	{
 		// Dysplay simulation results
 		super.simulationFinished();
+//		LinkedList<Minibus> minibusy = agentMinibusov().getMinibusy();
+//		double pocetKilometrov = 0;
+//		for (Minibus minibus : minibusy) {
+//			pocetKilometrov += minibus.getPrejdeneKilometre();
+//		}
+//		double cenaNaKm;
+//		String typ;
+//		if (pocetMiestMinibusu == 12){
+//			cenaNaKm = 0.28 * pocetKilometrov;
+//			typ = "A";
+//		}else if (pocetMiestMinibusu == 18){
+//			cenaNaKm = 0.43 * pocetKilometrov;
+//			typ = "B";
+//		}else {
+//			cenaNaKm = 0.54 * pocetKilometrov;
+//			typ = "C";
+//		}
+//		System.out.println(typ+", " +pocetMinibusov + ", " + pocetPracovnikov + ", " + ((Math.round((getCasVSystemePrichZak().confidenceInterval_90()[0]/60) * 100d) / 100d) + ", "
+//				+ (Math.round((getCasVSystemePrichZak().confidenceInterval_90()[1]/60) * 100d) / 100d))+ ", "+
+//				((Math.round((getCasVSystemeOdchZak().confidenceInterval_90()[0]/60) * 100d) / 100d) + ", "
+//						+ (Math.round((getCasVSystemeOdchZak().confidenceInterval_90()[1]/60) * 100d) / 100d))+ ", "+(pocetPracovnikov*11.5 + pocetMinibusov*12.5 +cenaNaKm));
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
