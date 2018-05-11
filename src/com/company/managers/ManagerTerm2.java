@@ -29,9 +29,15 @@ public class ManagerTerm2 extends Manager
 	//meta! sender="AgentPohybu", id="32", type="Request"
 	public void processNastupTerm2(MessageForm message)
 	{
-		message.setCode(Mc.start);
-		message.setAddressee(Id.procesNastupuTerm2);
-		startContinualAssistant(message);
+		if (!myAgent().getRadZakTerm2().isEmpty() &&
+				((MyMessage)message).getMinibus().getPocetVolnychMiest() >= myAgent().getRadZakTerm2().peek().getPocetCestujucich()){
+			message.setCode(Mc.start);
+			message.setAddressee(Id.procesNastupuTerm2);
+			startContinualAssistant(message);
+		}else {
+			message.setCode(Mc.nastupTerm2);
+			response(message);
+		}
 	}
 
 	//meta! sender="AgentPohybu", id="29", type="Notice"
