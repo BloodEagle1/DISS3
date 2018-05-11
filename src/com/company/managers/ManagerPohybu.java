@@ -79,7 +79,8 @@ public class ManagerPohybu extends Manager {
 
 	//meta! sender="AgentMinibusov", id="21", type="Response"
 	public void processPresunMinibusu(MessageForm message) {
-		switch (((MyMessage) message).getMinibus().getAktualnaZastavka()) {
+		((MyMessage)message).getMinibus().setPresuvaSa(false);
+		switch (((MyMessage) message).getMinibus().getCielovaZastavka()) {
 			case "Terminal 1":
 				message.setCode(Mc.nastupTerm1);
 				message.setAddressee(Id.agentTerm1);

@@ -44,7 +44,7 @@ public class ManagerMinibusov extends Manager
 	public void processPrichMinibusu(MessageForm message)
 	{
 		myAgent().vlozMinibus(((MyMessage)message).getMinibus());
-		((MyMessage)message).getMinibus().setAktualnaZastavka("Terminal 1");
+		((MyMessage)message).getMinibus().setCielovaZastavka("Terminal 1");
 		message.setCode(Mc.prichMinibusu);
 		response(message);
 	}

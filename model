@@ -5,7 +5,7 @@
       <SimId>8</SimId>
       <InternalId>8</InternalId>
       <Name>AgentObsluhy</Name>
-      <Bounds>1445,742,180,180</Bounds>
+      <Bounds>1587,644,180,180</Bounds>
       <Reasoner>ManagerObsluhy</Reasoner>
       <ReasonerBounds>74,25,32,25</ReasonerBounds>
       <UsePetriNet>false</UsePetriNet>
@@ -19,6 +19,15 @@
       </Components>
     </Agent>
     <Agent>
+      <SimId>3</SimId>
+      <InternalId>3</InternalId>
+      <Name>AgentPohybu</Name>
+      <Bounds>940,484,180,180</Bounds>
+      <Reasoner>ManagerPohybu</Reasoner>
+      <ReasonerBounds>74,25,32,25</ReasonerBounds>
+      <UsePetriNet>false</UsePetriNet>
+    </Agent>
+    <Agent>
       <SimId>1</SimId>
       <InternalId>1</InternalId>
       <Name>AgentOkolia</Name>
@@ -27,18 +36,6 @@
       <ReasonerBounds>74,25,32,25</ReasonerBounds>
       <UsePetriNet>false</UsePetriNet>
       <Components>
-        <Scheduler>
-          <SimId>1002</SimId>
-          <InternalId>39</InternalId>
-          <Name>PlanovacPrichZakTerm2</Name>
-          <Bounds>60,111,35,13</Bounds>
-        </Scheduler>
-        <Scheduler>
-          <SimId>1004</SimId>
-          <InternalId>43</InternalId>
-          <Name>PlanovacPrichMinibusov</Name>
-          <Bounds>110,110,35,13</Bounds>
-        </Scheduler>
         <Scheduler>
           <SimId>1001</SimId>
           <InternalId>37</InternalId>
@@ -51,6 +48,44 @@
           <Name>PlanovacPrichZakPozicovna</Name>
           <Bounds>134,70,35,13</Bounds>
         </Scheduler>
+        <Scheduler>
+          <SimId>1002</SimId>
+          <InternalId>39</InternalId>
+          <Name>PlanovacPrichZakTerm2</Name>
+          <Bounds>60,111,35,13</Bounds>
+        </Scheduler>
+        <Scheduler>
+          <SimId>1004</SimId>
+          <InternalId>43</InternalId>
+          <Name>PlanovacPrichMinibusov</Name>
+          <Bounds>110,110,35,13</Bounds>
+        </Scheduler>
+      </Components>
+    </Agent>
+    <Agent>
+      <SimId>2</SimId>
+      <InternalId>2</InternalId>
+      <Name>AgentModelu</Name>
+      <Bounds>630,70,180,180</Bounds>
+      <Reasoner>ManagerModelu</Reasoner>
+      <ReasonerBounds>74,25,32,25</ReasonerBounds>
+      <UsePetriNet>false</UsePetriNet>
+    </Agent>
+    <Agent>
+      <SimId>12</SimId>
+      <InternalId>30</InternalId>
+      <Name>AgentTerm3</Name>
+      <Bounds>732,982,180,180</Bounds>
+      <Reasoner>ManagerTerm3</Reasoner>
+      <ReasonerBounds>74,25,32,25</ReasonerBounds>
+      <UsePetriNet>false</UsePetriNet>
+      <Components>
+        <Process>
+          <SimId>1007</SimId>
+          <InternalId>52</InternalId>
+          <Name>ProcesVystupuTerm3</Name>
+          <Bounds>72,109,35,18</Bounds>
+        </Process>
       </Components>
     </Agent>
     <Agent>
@@ -92,41 +127,6 @@
           <Bounds>26,96,35,18</Bounds>
         </Process>
       </Components>
-    </Agent>
-    <Agent>
-      <SimId>3</SimId>
-      <InternalId>3</InternalId>
-      <Name>AgentPohybu</Name>
-      <Bounds>940,484,180,180</Bounds>
-      <Reasoner>ManagerPohybu</Reasoner>
-      <ReasonerBounds>74,25,32,25</ReasonerBounds>
-      <UsePetriNet>false</UsePetriNet>
-    </Agent>
-    <Agent>
-      <SimId>12</SimId>
-      <InternalId>30</InternalId>
-      <Name>AgentTerm3</Name>
-      <Bounds>732,982,180,180</Bounds>
-      <Reasoner>ManagerTerm3</Reasoner>
-      <ReasonerBounds>74,25,32,25</ReasonerBounds>
-      <UsePetriNet>false</UsePetriNet>
-      <Components>
-        <Process>
-          <SimId>1007</SimId>
-          <InternalId>52</InternalId>
-          <Name>ProcesVystupuTerm3</Name>
-          <Bounds>72,109,35,18</Bounds>
-        </Process>
-      </Components>
-    </Agent>
-    <Agent>
-      <SimId>2</SimId>
-      <InternalId>2</InternalId>
-      <Name>AgentModelu</Name>
-      <Bounds>630,70,180,180</Bounds>
-      <Reasoner>ManagerModelu</Reasoner>
-      <ReasonerBounds>74,25,32,25</ReasonerBounds>
-      <UsePetriNet>false</UsePetriNet>
     </Agent>
     <Agent>
       <SimId>10</SimId>
@@ -526,6 +526,46 @@
       <Source>9</Source>
       <Destination>63</Destination>
     </Message>
+    <Message>
+      <SimId>1036</SimId>
+      <InternalId>102</InternalId>
+      <Name>pocetPracovnikovVolnych</Name>
+      <Type>RequestResponse</Type>
+      <Source>7</Source>
+      <Destination>8</Destination>
+    </Message>
+    <Message>
+      <SimId>1037</SimId>
+      <InternalId>103</InternalId>
+      <Name>odchodZakaznika</Name>
+      <Type>Notice</Type>
+      <Source>7</Source>
+      <Destination>3</Destination>
+    </Message>
+    <Message>
+      <SimId>1038</SimId>
+      <InternalId>104</InternalId>
+      <Name>odchodZakaznika</Name>
+      <Type>Notice</Type>
+      <Source>30</Source>
+      <Destination>3</Destination>
+    </Message>
+    <Message>
+      <SimId>1039</SimId>
+      <InternalId>105</InternalId>
+      <Name>odchodZakaznika</Name>
+      <Type>Notice</Type>
+      <Source>3</Source>
+      <Destination>2</Destination>
+    </Message>
+    <Message>
+      <SimId>1043</SimId>
+      <InternalId>111</InternalId>
+      <Name>init</Name>
+      <Type>Notice</Type>
+      <Source>3</Source>
+      <Destination>2</Destination>
+    </Message>
   </Messages>
-  <IID>101</IID>
+  <IID>114</IID>
 </ABAsim>

@@ -25,24 +25,29 @@ public class ProcesPresunu extends Process
 	public void processStart(MessageForm message)
 	{
 		Minibus minibus = ((MyMessage)message).getMinibus();
-		switch (minibus.getAktualnaZastavka()) {
+		double casHoldu = 0;
+		minibus.setPresuvaSa(true);
+		switch (minibus.getCielovaZastavka()) {
 			case "Terminal 1":
 				message.setCode(Mc.presunHotovy);
-				hold(dajCasHoldu(0.5), message);
+				casHoldu = dajCasHoldu(0.5);
+				hold(casHoldu, message);
 				minibus.zvysPrejdeneKilometre(0.5);
-				minibus.setAktualnaZastavka("Terminal 2");
+				minibus.setCielovaZastavka("Terminal 2");
 				break;
 			case "Terminal 2":
 				message.setCode(Mc.presunHotovy);
-				hold(dajCasHoldu(3.4), message);
+				casHoldu = dajCasHoldu(3.4);
+				hold(casHoldu, message);
 				minibus.zvysPrejdeneKilometre(3.4);
-				minibus.setAktualnaZastavka("Pozicovna");
+				minibus.setCielovaZastavka("Pozicovna");
 				break;
 			case "Terminal 3":
 				message.setCode(Mc.presunHotovy);
-				hold(dajCasHoldu(0.9),message);
+				casHoldu = dajCasHoldu(0.9);
+				hold(casHoldu,message);
 				minibus.zvysPrejdeneKilometre(0.9);
-				minibus.setAktualnaZastavka("Terminal 1");
+				minibus.setCielovaZastavka("Terminal 1");
 				break;
 			case "Pozicovna":
 				if (minibus.isVystup()) {
@@ -52,21 +57,24 @@ public class ProcesPresunu extends Process
 				}else {
 					if (!minibus.getCestujuci().isEmpty()){
 						message.setCode(Mc.presunHotovy);
-						hold(dajCasHoldu(2.9), message);
+						casHoldu = dajCasHoldu(2.9);
+						hold(casHoldu, message);
 						minibus.zvysPrejdeneKilometre(2.9);
 						minibus.setVystup(true);
-						minibus.setAktualnaZastavka("Terminal 3");
+						minibus.setCielovaZastavka("Terminal 3");
 					}else{
 						message.setCode(Mc.presunHotovy);
-						hold(dajCasHoldu(2.5), message);
+						casHoldu = dajCasHoldu(2.5);
+						hold(casHoldu, message);
 						minibus.zvysPrejdeneKilometre(2.5);
 						minibus.setVystup(true);
-						minibus.setAktualnaZastavka("Terminal 1");
+						minibus.setCielovaZastavka("Terminal 1");
 					}
-
 				}
 				break;
 		}
+		minibus.setCasZacPresunu(mySim().currentTime());
+		minibus.setCasKedyMaSkoncitPresun(mySim().currentTime() + casHoldu);
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

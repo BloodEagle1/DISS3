@@ -54,7 +54,7 @@ public class GUI implements ISimDelegate {
     private JLabel jlRepStatPriemRadTerminal2;
     private JSlider sliderRychlost;
     private JSlider sliderFrekvencia;
-    private JLabel jlIntervalSpolahlivosti;
+    private JLabel jlIntervalSpolahlivostiCasVSysPrich;
     private JLabel jlRepStatPriemCasVRadeTerminal1;
     private JLabel jlRepStatPriemCasVRadeTerminal2;
     private JLabel jlStatPriemCasVRadeTerminal1;
@@ -68,6 +68,17 @@ public class GUI implements ISimDelegate {
     private JLabel jlPocetReplikacii;
     private JLabel jlAktualnaReplikacia;
     private JButton pauzaButton;
+	private JComboBox comboTypAuta;
+    private JLabel jlIntervalSpolahlivostiCasVSysOdch;
+    private JButton stopButton;
+    private JButton stopButton1;
+    private JLabel jlIntervalSpolahlivostiObsPrac;
+    private JLabel jlIntervalSpolahlivostiRadTerm1;
+    private JLabel jlIntervalSpolahlivostiRadTerm2;
+    private JLabel jlIntervalSpolahlivostiRadPozic;
+    private JLabel jlIntervalSpolahlivostiCasVRadTerm1;
+    private JLabel jlIntervalSpolahlivostiCasVRadTerm2;
+    private JLabel jlIntervalSpolahlivostiCasVRadPozic;
     private JFreeChart lineChart;
     private XYSeries series;
     private JFreeChart lineChart2;
@@ -90,7 +101,7 @@ public class GUI implements ISimDelegate {
         this.spodna2 = Double.MAX_VALUE;
         this.horna1 = Double.MIN_VALUE;
         this.horna2 = Double.MIN_VALUE;
-        String col[] = {"Minibus", "Predosla zastavka", "Aktualna zastavka", "Pocet cestujucich", "Prejdene kilometre"};
+        String col[] = {"Minibus", "Predosla zastavka", "Cielova zastavka", "Pocet cestujucich", "Pozicica presunu", "Prejdene kilometre"};
         tableModel = new DefaultTableModel(col, 0);
         jtMinibusy.setModel(tableModel);
         String col1[] = {"Pracovnik", "Obsadenost"};
@@ -115,10 +126,24 @@ public class GUI implements ISimDelegate {
             public void chartMouseClicked(ChartMouseEvent chartMouseEvent) {
                 if (!jtfPocetPracovnikov.getText().equals("") && !jtfPocetReplikacii.getText().equals("")) {
                     series.clear();
-                    for (int i = 2; i < 20; i++) {
-//                        Pozicovna pozicovna = new Pozicovna((double) (Integer.parseInt(jtfPocetReplikacii.getText())) * 31 * 24 * 60 * 60, Integer.parseInt(jtfPocetPracovnikov.getText()), i + 1);
-//                        pozicovna.registrujDelegata(GUI.this);
-//                        pozicovna.spust();
+                    int pocetPracovnikov = Integer.parseInt(jtfPocetPracovnikov.getText());
+                    int pocetMiest;
+
+                    if (comboTypAuta.getSelectedItem().equals("typ A")){
+                        pocetMiest = 12;
+                    } else if (comboTypAuta.getSelectedItem().equals("typ B")){
+                        pocetMiest = 18;
+                    }else {
+                        pocetMiest = 30;
+                    }
+
+                    for (int i = 1; i < 30; i++) {
+                        pozicovna.setPocetMinibusov(i);
+                        pozicovna.setPocetPracovnikov(pocetPracovnikov);
+                        pozicovna.setPocetMiestMinibusu(pocetMiest);
+                        pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(100000, 1/100));
+                        pozicovna.onSimulationDidFinish(GUI.this::refresh);
+                        pozicovna.simulate(10, 5.5*60*60);
                     }
                 } else {
                     JOptionPane.showMessageDialog(panel, "Nespravne parametre");
@@ -146,10 +171,24 @@ public class GUI implements ISimDelegate {
             public void chartMouseClicked(ChartMouseEvent chartMouseEvent) {
                 if (!jtfPocetMinibusov.getText().equals("") && !jtfPocetReplikacii.getText().equals("")) {
                     series2.clear();
-                    for (int i = 3; i < 20; i++) {
-//                        Pozicovna pozicovna = new Pozicovna((double) (Integer.parseInt(jtfPocetReplikacii.getText())) * 31 * 24 * 60 * 60, i + 1, Integer.parseInt(jtfPocetMinibusov.getText()));
-//                        pozicovna.registrujDelegata(GUI.this);
-//                        pozicovna.spust();
+                    int pocetMinibusov = Integer.parseInt(jtfPocetMinibusov.getText());
+                    int pocetMiest;
+
+                    if (comboTypAuta.getSelectedItem().equals("typ A")){
+                        pocetMiest = 12;
+                    } else if (comboTypAuta.getSelectedItem().equals("typ B")){
+                        pocetMiest = 18;
+                    }else {
+                        pocetMiest = 30;
+                    }
+
+                    for (int i = 1; i < 30; i++) {
+                        pozicovna.setPocetMinibusov(pocetMinibusov);
+                        pozicovna.setPocetPracovnikov(i);
+                        pozicovna.setPocetMiestMinibusu(pocetMiest);
+                        pozicovna.onReplicationWillStart(sim -> pozicovna.setSimSpeed(100000, 1/100));
+                        pozicovna.onSimulationDidFinish(GUI.this::refresh);
+                        pozicovna.simulate(10, 5.5*60*60);
                     }
                 } else {
                     JOptionPane.showMessageDialog(panel, "Nespravne parametre");
@@ -169,6 +208,15 @@ public class GUI implements ISimDelegate {
                 int pocetMinibusov = Integer.parseInt(jtfPocetMinibusov.getText());
                 int pocetPracovnikov = Integer.parseInt(jtfPocetPracovnikov.getText());
                 int pocetReplikacii = Integer.parseInt(jtfPocetReplikacii.getText());
+				int pocetMiest;
+
+				if (comboTypAuta.getSelectedItem().equals("typ A")){
+					pocetMiest = 12;
+				} else if (comboTypAuta.getSelectedItem().equals("typ B")){
+					pocetMiest = 18;
+				}else {
+					pocetMiest = 30;
+				}
 
                 jlRepStatPriemCasVRadeNaObsluhu.setText("");
                 jlRepStatPriemRadObsluhy.setText("");
@@ -177,11 +225,19 @@ public class GUI implements ISimDelegate {
                 jlRepStatPriemObsadenostPracovnikov.setText("");
                 jlRepStatPriemRadTerminal1.setText("");
                 jlRepStatPriemRadTerminal2.setText("");
-                jlIntervalSpolahlivosti.setText("< , >");
                 jlRepStatPriemCasVRadeTerminal1.setText("");
                 jlRepStatPriemCasVRadeTerminal2.setText("");
                 jlAktualnaReplikacia.setText("0");
                 jlPocetReplikacii.setText(pocetReplikacii+"");
+                jlIntervalSpolahlivostiCasVSysPrich.setText("< , >");
+                jlIntervalSpolahlivostiCasVSysOdch.setText("< , >");
+                jlIntervalSpolahlivostiObsPrac.setText("< , >");
+                jlIntervalSpolahlivostiRadTerm1.setText("< , >");
+                jlIntervalSpolahlivostiRadTerm2.setText("< , >");
+                jlIntervalSpolahlivostiRadPozic.setText("< , >");
+                jlIntervalSpolahlivostiCasVRadTerm1.setText("< , >");
+                jlIntervalSpolahlivostiCasVRadTerm2.setText("< , >");
+                jlIntervalSpolahlivostiCasVRadPozic.setText("< , >");
 
 //                for (int i = 16; i < 21; i++) {
 //                    for (int j = 5; j < 21; j++) {
@@ -193,9 +249,9 @@ public class GUI implements ISimDelegate {
 
                 pozicovna.setPocetMinibusov(pocetMinibusov);
                 pozicovna.setPocetPracovnikov(pocetPracovnikov);
-                pozicovna.setPocetMiestMinibusu(12);
-                pozicovna.simulateAsync(pocetReplikacii, 5.5*60*60);
+                pozicovna.setPocetMiestMinibusu(pocetMiest);
                 pozicovna.onReplicationDidFinish(this::refresh);
+                pozicovna.simulateAsync(pocetReplikacii, 5.5*60*60);
             } else {
                 JOptionPane.showMessageDialog(panel, "Nespravne parametre");
             }
@@ -204,6 +260,15 @@ public class GUI implements ISimDelegate {
             if (!jtfPocetMinibusov.getText().equals("") && !jtfPocetPracovnikov.getText().equals("")) {
                 int pocetMinibusov = Integer.parseInt(jtfPocetMinibusov.getText());
                 int pocetPracovnikov = Integer.parseInt(jtfPocetPracovnikov.getText());
+				int pocetMiest;
+
+				if (comboTypAuta.getSelectedItem().equals("typ A")){
+					pocetMiest = 12;
+				} else if (comboTypAuta.getSelectedItem().equals("typ B")){
+					pocetMiest = 18;
+				}else {
+					pocetMiest = 30;
+				}
 
                 jlVelkostRaduTerminal1.setText("");
                 jlVelkostRaduTerminal2.setText("");
@@ -252,9 +317,8 @@ public class GUI implements ISimDelegate {
 
                 pozicovna.setPocetMinibusov(pocetMinibusov);
                 pozicovna.setPocetPracovnikov(pocetPracovnikov);
-                pozicovna.setPocetMiestMinibusu(12);
+                pozicovna.setPocetMiestMinibusu(pocetMiest);
                 pozicovna.simulateAsync(1, 5.5*60*60);
-                pozicovna.onSimulationDidFinish(this::refresh);
             } else {
                 JOptionPane.showMessageDialog(panel, "Nespravne parametre");
             }
@@ -283,14 +347,25 @@ public class GUI implements ISimDelegate {
                 pauzaButton.setText("pauza");
             }
         });
+        stopButton.addActionListener(e -> {
+            pozicovna.stopSimulation();
+        });
+        stopButton1.addActionListener(e -> {
+            pozicovna.stopSimulation();
+        });
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            System.out.println("Error setting native LAF: " + e);
+        }
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new GUI().panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(1300, 500);
+        frame.setSize(1300, 700);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
@@ -304,7 +379,26 @@ public class GUI implements ISimDelegate {
         jlRepStatPriemObsadenostPracovnikov.setText((Math.round(pozicovna.getObsadenostPracovnikov().mean() * 10000d) / 10000d) + "");
         jlRepStatPriemRadTerminal1.setText((Math.round(pozicovna.getVelkostRaduStatTerm1().mean() * 10000d) / 10000d) + "");
         jlRepStatPriemRadTerminal2.setText((Math.round(pozicovna.getVelkostRaduStatTerm2().mean() * 10000d) / 10000d) + "");
-//        jlIntervalSpolahlivosti.setText(pozicovna.vypocitajInterval());
+        if(pozicovna.currentReplication() > 1){
+            jlIntervalSpolahlivostiCasVSysPrich.setText("< " + (Math.round((pozicovna.getCasVSystemePrichZak().confidenceInterval_90()[0]/60) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getCasVSystemePrichZak().confidenceInterval_90()[1]/60) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiCasVSysOdch.setText("< " + (Math.round((pozicovna.getCasVSystemeOdchZak().confidenceInterval_90()[0]/60) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getCasVSystemeOdchZak().confidenceInterval_90()[1]/60) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiObsPrac.setText("< " + (Math.round((pozicovna.getObsadenostPracovnikov().confidenceInterval_90()[0]) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getObsadenostPracovnikov().confidenceInterval_90()[1]) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiRadTerm1.setText("< " + (Math.round((pozicovna.getVelkostRaduStatTerm1().confidenceInterval_90()[0]) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getVelkostRaduStatTerm1().confidenceInterval_90()[1]) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiRadTerm2.setText("< " + (Math.round((pozicovna.getVelkostRaduStatTerm2().confidenceInterval_90()[0]) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getVelkostRaduStatTerm2().confidenceInterval_90()[1]) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiRadPozic.setText("< " + (Math.round((pozicovna.getVelkostRaduStatPozicovna().confidenceInterval_90()[0]) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getVelkostRaduStatPozicovna().confidenceInterval_90()[1]) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiCasVRadTerm1.setText("< " + (Math.round((pozicovna.getCasVRadeTerm1().confidenceInterval_90()[0]/60) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getCasVRadeTerm1().confidenceInterval_90()[1]/60) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiCasVRadTerm2.setText("< " + (Math.round((pozicovna.getCasVRadeTerm2().confidenceInterval_90()[0]/60) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getCasVRadeTerm2().confidenceInterval_90()[1]/60) * 10000d) / 10000d) + " >");
+            jlIntervalSpolahlivostiCasVRadPozic.setText("< " + (Math.round((pozicovna.getCasVRadePozicovna().confidenceInterval_90()[0]/60) * 10000d) / 10000d) + ","
+                    + (Math.round((pozicovna.getCasVRadePozicovna().confidenceInterval_90()[1]/60) * 10000d) / 10000d) + " >");
+        }
         jlRepStatPriemCasVRadeTerminal1.setText((Math.round((pozicovna.getCasVRadeTerm1().mean()/60) * 10000d) / 10000d) + " min");
         jlRepStatPriemCasVRadeTerminal2.setText((Math.round((pozicovna.getCasVRadeTerm2().mean()/60) * 10000d) / 10000d) + " min");
     }
@@ -354,9 +448,15 @@ public class GUI implements ISimDelegate {
                 minibus = minibusy.get(i);
                 if (minibusy.get(i) != null){
                     tableModel.setValueAt(minibus.getPredoslaZastavka(), i, 1);
-                    tableModel.setValueAt(minibus.getAktualnaZastavka(), i, 2);
+                    tableModel.setValueAt(minibus.getCielovaZastavka(), i, 2);
                     tableModel.setValueAt(minibus.getCestujuci().size(), i, 3);
-					tableModel.setValueAt(minibus.getPrejdeneKilometre(), i, 4);
+                    if (minibus.isPresuvaSa()){
+						double percentoPozicie = ((pozicovna.currentTime() - minibus.getCasZacPresunu()) / (minibus.getCasKedyMaSkoncitPresun() - minibus.getCasZacPresunu())) * 100;
+						tableModel.setValueAt((Math.round(percentoPozicie * 100d) / 100d) + " %", i, 4);
+					}else {
+						tableModel.setValueAt("", i, 4);
+					}
+					tableModel.setValueAt((Math.round(minibus.getPrejdeneKilometre() * 100d) / 100d), i, 5);
                 }
             }
         }
@@ -418,11 +518,14 @@ public class GUI implements ISimDelegate {
         if (activePanel == jpReplikacia) {
             vypisVysledkyVCase(simulation1);
         } else if (activePanel == jpReplikacie) {
-            vypisVysledkyReplikacii(simulation1);
+            if (!simulation1.isReplicationRunning())
+                vypisVysledkyReplikacii(simulation1);
         } else if (activePanel == jpZavislostMinibusov) {
-//            vykresliGraf(pozicovna.getMinibusy(), pozicovna.repStatCasuVSysteme());
+            if (!simulation1.isRunning())
+                vykresliGraf(simulation1.getPocetMinibusov(), simulation1.getCasVSystemePrichZak().mean() /60);
         } else if (activePanel == jpZavislostPracovnikov) {
-//            vykresliGraf2(pozicovna.getPracovnici(), pozicovna.repStatCasuVSysteme());
+            if (!simulation1.isRunning())
+                vykresliGraf2(simulation1.getPocetPracovnikov(), simulation1.getCasVSystemePrichZak().mean() /60);
         }
     }
 }

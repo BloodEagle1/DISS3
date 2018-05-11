@@ -6,10 +6,12 @@ import com.company.entity.Zakaznik;
 import com.company.simulation.*;
 import com.company.agents.*;
 
+import java.util.Random;
+
 //meta! id="41"
 public class PlanovacPrichZakPozicovna extends Scheduler {
 
-	private static final int HODINA = 3600;
+	private static final double HODINA = 3600.0;
 	private static final double[] vstupy = {12.0, 9.0, 18.0, 28.0, 23.0, 21.0, 16.0, 11.0, 17.0, 22.0, 36.0, 24.0, 32.0, 16.0, 13.0, 13.0, 5.0, 4.0};
 	private static ExponentialRNG exponentialRNG1 = new ExponentialRNG(HODINA / vstupy[0]);
 	private static ExponentialRNG exponentialRNG2 = new ExponentialRNG(HODINA / vstupy[1]);
@@ -51,8 +53,7 @@ public class PlanovacPrichZakPozicovna extends Scheduler {
 	public void processStart(MessageForm message) {
 		message.setCode(Mc.novyZakaznik);
 		double cas = dajCasHoldu();
-		if (cas > 0)
-			hold(cas, message);
+		hold(cas, message);
     }
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -63,10 +64,9 @@ public class PlanovacPrichZakPozicovna extends Scheduler {
 
 	//meta! sender="AgentOkolia", id="83", type="Notice"
 	public void processNovyZakaznik(MessageForm message) {
-		MyMessage msg = new MyMessage((MyMessage) message);
+		MyMessage msg = (MyMessage) message.createCopy();
 		double cas = dajCasHoldu();
-		if (cas > 0)
-			hold(cas, msg);
+		hold(cas, msg);
 
 		Zakaznik zakaznik = new Zakaznik(mySim());
 		zakaznik.setPrichadzajuci(false);
@@ -101,25 +101,37 @@ public class PlanovacPrichZakPozicovna extends Scheduler {
     }
 
 	private int dajIndexGeneratoraVstupu(double cas){
-		return (int)Math.floor((cas / (15 * 60))%17);
+		return (int)Math.floor((cas / (15 * 60))%18);
 	}
 
 	private double dajCasHoldu(){
+//		int indexGenVstupu = dajIndexGeneratoraVstupu(mySim().currentTime());
+//		double vysledokGeneratora = genVstupov[indexGenVstupu].sample();
+//		if (vysledokGeneratora > 900)
+//			vysledokGeneratora = 900;
+//		double casPoHolde = mySim().currentTime() + vysledokGeneratora;
+//		int indexGenVstupuPoHolde = dajIndexGeneratoraVstupu(casPoHolde);
+//
+//		if (indexGenVstupuPoHolde != indexGenVstupu && vstupy[indexGenVstupu] < vstupy[indexGenVstupuPoHolde]){
+//			double vysledokNovehoGeneratora = genVstupov[(indexGenVstupu+1)].sample();
+//			if (vysledokNovehoGeneratora > 900)
+//				vysledokNovehoGeneratora = 900;
+//			return (((casPoHolde - ((indexGenVstupu+1) * (15*60))) + vysledokNovehoGeneratora) / 2) + (((15 * 60)*(indexGenVstupu+1))-mySim().currentTime());
+//		}else {
+//			return vysledokGeneratora;
+//		}
+		double vysledokGeneratora;
 		int indexGenVstupu = dajIndexGeneratoraVstupu(mySim().currentTime());
-		double vysledokGeneratora = genVstupov[indexGenVstupu].sample();
-		if (vysledokGeneratora > 900)
-			vysledokGeneratora = 900;
-		double casPoHolde = mySim().currentTime() + vysledokGeneratora;
-		int indexGenVstupuPoHolde = dajIndexGeneratoraVstupu(casPoHolde);
-
-		if (indexGenVstupuPoHolde != indexGenVstupu && vstupy[indexGenVstupu] < vstupy[indexGenVstupuPoHolde]){
-			double vysledokNovehoGeneratora = genVstupov[(indexGenVstupu+1)].sample();
-			if (vysledokNovehoGeneratora > 900)
-				vysledokNovehoGeneratora = 900;
-			return (((casPoHolde - ((indexGenVstupu+1) * (15*60))) + vysledokNovehoGeneratora) / 2) + (((15 * 60)*(indexGenVstupu+1))-mySim().currentTime());
-		}else {
-			return vysledokGeneratora;
+		Random rnd = new Random();
+		while (true){
+			double s = genVstupov[indexGenVstupu].sample();
+			double pom = rnd.nextDouble();
+			if ((s / ((3600 /vstupy[indexGenVstupu]))) >= pom){
+				vysledokGeneratora = s;
+				break;
+			}
 		}
+		return vysledokGeneratora;
 	}
 
 }
